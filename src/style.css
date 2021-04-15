@@ -1,0 +1,8 @@
+body {
+    background-image: url(./resources/background.png);
+}
+#title {
+    width: 70%;
+    display: block;
+    margin: auto;
+}
