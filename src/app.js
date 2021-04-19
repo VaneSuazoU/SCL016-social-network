@@ -40,18 +40,36 @@ function authentication(provider) {
         });
 }
 
+/* lo nuevo */
+export const myfuncion = () => {
+    let email = document.getElementById('email').value;
+    let password = document.getElementById('password').value;
+
+    firebase.auth().createUserWithEmailAndPassword(email, password)
+  .then((userCredential) => {
+    // Signed in
+    var user = userCredential.user;
+    // ...
+  })
+  .catch((error) => {
+    var errorCode = error.code;
+    var errorMessage = error.message;
+    // ..
+  });
+};
+  
+
 
 
 
 
 
 /* Firestore */
-let database = firebase.firestore();
+// let database = firebase.firestore();
 
-database.collection("usuarios").get().then((querySnapshot) => {
-    querySnapshot.forEach((doc) => {
-        // doc.data() is never undefined for query doc snapshots
-        console.log(doc.id, " => ", doc.data());
-    });
-});
-/* BASE DE DATOS */
+// database.collection("usuarios").get().then((querySnapshot) => {
+//     querySnapshot.forEach((doc) => {
+//         // doc.data() is never undefined for query doc snapshots
+//         console.log(doc.id, " => ", doc.data());
+//     });
+// });

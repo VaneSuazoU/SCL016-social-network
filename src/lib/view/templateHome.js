@@ -1,8 +1,11 @@
 export const home = () => {
     const divHome = document.createElement('div');
     const viewHome = 
-    `<img src="./lib/resources/titulo.png" id="title" alt="">
-    <button type="button" id="button">Ingresa con google</button>`
+    `<button type="button" id="button">Ingresa con google</button>
+    
+    <input type="email" id ="email" placeholder="Tu email aquí">
+    <input type="password" id ="password" placeholder="Tu contraseña aquí">
+    <button id="send">Enviar</button> `
 
     divHome.innerHTML = viewHome;
 

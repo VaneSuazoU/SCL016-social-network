@@ -1,6 +1,7 @@
 export const menu = () => {
     const viewMenu = 
-`    <ul>
+`   <img src="./lib/resources/logo.png" class="title" alt="">
+    <ul>
     <li>
     <a href="#/">Home</a> 
     </li>
