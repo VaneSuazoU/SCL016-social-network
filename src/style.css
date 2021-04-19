@@ -1,8 +1,15 @@
 body {
-    background-image: url(./resources/background.png);
+    background-image: url(./lib/resources/background.png);
 }
 #title {
-    width: 70%;
+    width: 50%;
+    display: block;
+    margin: auto;
+}
+#button {
+    background-color: #c4c4c4;
+    width: 25%;
+    filter: drop-shadow(2px 2px 3px black);
     display: block;
     margin: auto;
 }

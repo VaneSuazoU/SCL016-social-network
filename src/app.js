@@ -9,12 +9,9 @@ var firebaseConfig = {
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 
-let boton = document.getElementById('button');
-boton.addEventListener('click', () => {
-    authGoogle();
-});
 
-function authGoogle() {
+
+export function authGoogle() {
     var provider = new firebase.auth.GoogleAuthProvider();
     authentication(provider);
 }
