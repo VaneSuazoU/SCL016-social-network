@@ -1,6 +1,6 @@
-import { home } from './view/templateHome.js';
-import { personajes } from './view/templatePersonajes.js';
-import { menu } from './view/templateMenu.js';
+import { home } from './views/templateHome.js';
+import { personajes } from './views/templatePersonajes.js';
+import { menu } from './views/templateMenu.js';
 
 export const changeRoute = (hash) => {
     if( hash === '#/'){

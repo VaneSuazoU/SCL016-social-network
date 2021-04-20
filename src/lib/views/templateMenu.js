@@ -1,6 +1,6 @@
 export const menu = () => {
     const viewMenu = 
-`   <img src="./lib/resources/logo.png" class="title" alt="">
+`   <img src="./lib/images/logo.png" class="title" alt="">
     <ul>
     <li>
     <a href="#/">Home</a> 
@@ -8,7 +8,7 @@ export const menu = () => {
     <li> 
     <a href="#/personajes">Memes</a> 
     </li>
-    </ul>`
+    </ul>`  
 
     return viewMenu;
 }

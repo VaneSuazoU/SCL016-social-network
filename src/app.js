@@ -1,3 +1,6 @@
+import { personajes } from './lib/views/templatePersonajes.js';
+import { home } from './lib/views/templateHome.js';
+
 var firebaseConfig = {
     apiKey: "AIzaSyDOoxqpxrm0fytTOYMx1OQ26RHoGEYjLwQ",
     authDomain: "meme-time-e23ce.firebaseapp.com",
@@ -40,7 +43,7 @@ function authentication(provider) {
         });
 }
 
-/* lo nuevo */
+
 export const myfuncion = () => {
     let email = document.getElementById('email').value;
     let password = document.getElementById('password').value;
@@ -57,10 +60,52 @@ export const myfuncion = () => {
     // ..
   });
 };
-  
+
+/* lo nuevo */ 
+export const myfuncion2 = () => {
+  let email2 = document.getElementById('email2').value;
+  let password2 = document.getElementById('password2').value;
+
+  firebase.auth().signInWithEmailAndPassword(email2, password2)
+  .then((userCredential) => {
+    // Signed in
+    var user = userCredential.user;
+    // ...
+  })
+  .catch((error) => {
+    var errorCode = error.code;
+    var errorMessage = error.message;
+  });
+};
 
 
+export const observador = () => {
+    
+  firebase.auth().onAuthStateChanged(function(user) {
+  if (user) {
+    // User is signed in.
+    aparece();
+    let displayName = user.displayName;
+    let email = user.email;
+    let emailVerified = user.emailVerified;
+    let photoURL = user.photoURL;
+    let isAnonymous = user.isAnonymous;
+    let uid = user.uid;
+    let providerData = user.providerData; 
+  } else {
+    // No user is signed in.
+    console.log('no existe usuario activo');
+  }
+});
+};
 
+observador();
+
+export const aparece = () => {
+  home.style.display = "none";
+  let contenido = document.getElementById('contenido');
+  contenido.appendChild(personajes());
+}
 
 
 

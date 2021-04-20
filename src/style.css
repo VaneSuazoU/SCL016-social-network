@@ -1,5 +1,5 @@
 body {
-    background-image: url(./lib/resources/background.png);
+    background-image: url(./lib/images/background.png);
 }
 .title {
     width: 40%;
@@ -9,7 +9,11 @@ body {
 #button {
     background-color: #c4c4c4;
     width: 25%;
-    filter: drop-shadow(2px 2px 3px black);
+    filter: drop-shadow(1px 1px 2px gray);
     display: block;
     margin: auto;
 }
+/* .divHome {
+    background-color: aliceblue;
+    width: 100%;
+} */
