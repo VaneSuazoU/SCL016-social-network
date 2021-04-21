@@ -48,7 +48,7 @@ export const createAccount = () => {
   let password = document.getElementById('password').value;
 
   firebase.auth().createUserWithEmailAndPassword(email, password)
-    .then((userCredential) => {
+    .then((userCredential) => {    
      emailVerification();
       // Signed in
       var user = userCredential.user;
@@ -66,9 +66,11 @@ export const signIn = () => {
   let email2 = document.getElementById('email2').value;
   let password2 = document.getElementById('password2').value;
 
+  
   firebase.auth().signInWithEmailAndPassword(email2, password2)
     .then((userCredential) => {
-      // Signed in
+      // Signed in  
+      recuperar2();
       var user = userCredential.user;
       // ...
     })
@@ -86,7 +88,6 @@ export const observador = () => {
       // User is signed in.
       console.log('existe usuario activo');
       aparece(user);
-      
       let displayName = user.displayName;
       let email = user.email;
       console.log("***********");
@@ -98,7 +99,7 @@ export const observador = () => {
       let uid = user.uid;
       let providerData = user.providerData;
     } else {
-      // No user is signed in.
+      // No user is signed in
       console.log('no existe usuario activo');
     }
   });
@@ -144,6 +145,16 @@ user.sendEmailVerification().then(function() {
 });
 }
 
+export const recuperar2 = () => {
+  var auth = firebase.auth();
+  var emailAddress = document.getElementById('email2').value;
+  
+  auth.sendPasswordResetEmail(emailAddress).then(function() {
+    // Email sent.
+  }).catch(function(error) {
+    // An error happened.
+  });
+}
 /* Firestore */
 // let database = firebase.firestore();
 
