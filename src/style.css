@@ -1,19 +1,25 @@
+* {
+    font-family: 'Lexend', sans-serif;
+}
+
 body {
     background-image: url(./lib/images/background.png);
+   /*  background-repeat: round; ESTO VA PARA WEB, no funciona en mobile */
 }
 .title {
     width: 40%;
     display: block;
     margin: auto;
 }
-#button {
-    background-color: #c4c4c4;
+#google {
+    background-color: antiquewhite;
     width: 25%;
     filter: drop-shadow(1px 1px 2px gray);
     display: block;
     margin: auto;
 }
-/* .divHome {
-    background-color: aliceblue;
-    width: 100%;
-} */
+#img-error {
+    display: block;
+    margin: auto;
+    width: 50%;
+}

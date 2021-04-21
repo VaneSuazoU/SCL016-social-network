@@ -1,5 +1,6 @@
 import { home } from './views/templateHome.js';
 import { personajes } from './views/templatePersonajes.js';
+import { error } from './views/templateError.js';
 import { menu } from './views/templateMenu.js';
 
 export const changeRoute = (hash) => {
@@ -24,6 +25,6 @@ const showTemplate = (hash) => {
         containerRoot.appendChild(personajes());
         break;
         default: 
-        containerRoot.innerHTML = `<h2>Error 404</h2>`;
+        containerRoot.appendChild(error());
     }
 }

@@ -3,10 +3,10 @@ export const menu = () => {
 `   <img src="./lib/images/logo.png" class="title" alt="">
     <ul>
     <li>
-    <a href="#/">Home</a> 
+    <a href="#/">Ingreso</a> 
     </li>
     <li> 
-    <a href="#/personajes">Memes</a> 
+    <a href="#/personajes">Registro</a> 
     </li>
     </ul>`  
 

@@ -3,7 +3,6 @@
 import { myFunction } from './lib/index.js';
 import { menu } from './lib/views/templateMenu.js';
 import { changeRoute } from './lib/router.js';
-import { authGoogle, myfuncion } from './app.js';
 
 
 const init = () => {
@@ -11,17 +10,6 @@ const init = () => {
     window.addEventListener('hashchange', () => {
         myFunction();
         changeRoute(window.location.hash)
-
-        let google = document.getElementById('button');
-        google.addEventListener('click', () => {
-            authGoogle();
-        });
-        let send = document.getElementById('send');
-        send.addEventListener('click', () => {
-        myfuncion();
-        });
-
-        
     })
 }
 
