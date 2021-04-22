@@ -8,7 +8,8 @@ export const menu = () => {
     <li> 
     <a href="#/personajes">Registro</a> 
     </li>
-    </ul>`  
+    </ul>
+`  
 
     return viewMenu;
 }

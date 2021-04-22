@@ -1,6 +1,7 @@
 import { home } from './views/templateHome.js';
 import { personajes } from './views/templatePersonajes.js';
 import { error } from './views/templateError.js';
+import { recuperar } from './views/templateRecuperar.js';
 import { menu } from './views/templateMenu.js';
 
 export const changeRoute = (hash) => {
@@ -23,6 +24,9 @@ const showTemplate = (hash) => {
         break;
         case '#/personajes':
         containerRoot.appendChild(personajes());
+        break;
+        case '#/recuperar':
+        containerRoot.appendChild(recuperar());
         break;
         default: 
         containerRoot.appendChild(error());

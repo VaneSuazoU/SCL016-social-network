@@ -1,4 +1,4 @@
-import { authGoogle , signIn , recuperar2 } from '../../app.js';
+import { authGoogle , signIn } from '../firebase/firebase-auth.js';
 
 export const home = () => {
     const divHome = document.createElement('div');
@@ -10,10 +10,15 @@ export const home = () => {
     <input type="email" id ="email2" placeholder="Tú email aquí">
     <input type="password" id ="password2" placeholder="Tú contraseña aquí">
     <button id="send2">Ingresar</button>
-    <button id="recuperar">Recuperar contraseña</button>
 
-    
-    <div id="contenido"></div>`
+    <a href="#/recuperar">¿Olvidaste tu contraseña?</a>
+
+    <h2>¿No tienes una cuenta?</h2>
+    <a href="#/personajes">Regístrate aquí</a>
+
+
+    <div id="contenido"></div>
+    <img src="./lib/images/footer.png" class="title" alt="">`
 
     divHome.innerHTML = viewHome;
 
@@ -21,13 +26,9 @@ export const home = () => {
     google.addEventListener('click', () => {
         authGoogle();
     });
-    let send2 =  divHome.querySelector('#send2');
-    send2.addEventListener('click', () => {
+    let sign =  divHome.querySelector('#send2');
+    sign.addEventListener('click', () => {
         signIn();
-    });
-    let recuperar =  divHome.querySelector('#recuperar');
-    recuperar.addEventListener('click', () => {
-        recuperar2();
     });
 
     return divHome;

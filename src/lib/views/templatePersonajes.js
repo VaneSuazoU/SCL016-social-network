@@ -1,13 +1,18 @@
-import {createAccount } from '../../app.js';
+import {createAccount } from '../firebase/firebase-auth.js';
 
 export const personajes = () => {
     const divPersonajes = document.createElement('div');
     const viewPersonajes = 
     ` <h2>Registro</h2>
-       
+    
+    <input type="text" id ="username" placeholder="Tú nombre aquí">
     <input type="email" id ="email" placeholder="Tú email aquí">
     <input type="password" id ="password" placeholder="Tú contraseña aquí">
-    <button id="send">Registrar</button>`
+    <button id="send">Registrar</button>
+    
+    <h2>¿Ya tienes una cuenta?</h2>
+    <a href="#/">Inicia sesión</a>
+    <img src="./lib/images/footer.png" class="title" alt="">`
 
     divPersonajes.innerHTML = viewPersonajes;
 
