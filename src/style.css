@@ -23,3 +23,8 @@ body {
     margin: auto;
     width: 50%;
 }
+.error {
+    color: orangered;
+    text-align: center;
+    font-weight: bold;
+}

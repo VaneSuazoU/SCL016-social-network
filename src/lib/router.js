@@ -4,31 +4,35 @@ import { error } from './views/templateError.js';
 import { recuperar } from './views/templateRecuperar.js';
 import { menu } from './views/templateMenu.js';
 
-export const changeRoute = (hash) => {
-    if( hash === '#/'){
-        return showTemplate(hash)
-    } else if (hash === '#/personajes') {
-        return showTemplate(hash)
-    } else {
-        return showTemplate(hash)
-    }
-}
-
 const showTemplate = (hash) => {
-    const containerRoot = document.getElementById('root');
-    containerRoot.innerHTML = menu();
+  const containerRoot = document.getElementById('root');
+  containerRoot.innerHTML = '';
 
-    switch (hash) {
-        case '#/':
-        containerRoot.appendChild(home());
-        break;
-        case '#/personajes':
-        containerRoot.appendChild(personajes());
-        break;
-        case '#/recuperar':
-        containerRoot.appendChild(recuperar());
-        break;
-        default: 
-        containerRoot.appendChild(error());
-    }
-}
+  switch (hash) {
+    case '':
+    case '#':
+    case '#/':
+      containerRoot.appendChild(home());
+      break;
+    case '#/personajes':
+      containerRoot.appendChild(personajes());
+      break;
+    case '#/recuperar':
+      containerRoot.appendChild(recuperar());
+      break;
+    case '#/menu':
+      containerRoot.appendChild(menu());
+      break;
+    default:
+      containerRoot.appendChild(error());
+  }
+};
+
+export const changeRoute = (hash) => {
+  if (hash === '#/') {
+    return showTemplate(hash);
+  } if (hash === '#/personajes') {
+    return showTemplate(hash);
+  }
+  return showTemplate(hash);
+};

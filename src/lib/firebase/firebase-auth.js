@@ -1,103 +1,157 @@
-var firebaseConfig = {
-  apiKey: "AIzaSyDOoxqpxrm0fytTOYMx1OQ26RHoGEYjLwQ",
-  authDomain: "meme-time-e23ce.firebaseapp.com",
-  projectId: "meme-time-e23ce",
-  storageBucket: "meme-time-e23ce.appspot.com",
-  messagingSenderId: "333217439157",
-  appId: "1:333217439157:web:6c3a1c3e59ec8a86db0dfc"
+const firebaseConfig = {
+  apiKey: 'AIzaSyDOoxqpxrm0fytTOYMx1OQ26RHoGEYjLwQ',
+  authDomain: 'meme-time-e23ce.firebaseapp.com',
+  projectId: 'meme-time-e23ce',
+  storageBucket: 'meme-time-e23ce.appspot.com',
+  messagingSenderId: '333217439157',
+  appId: '1:333217439157:web:6c3a1c3e59ec8a86db0dfc',
 };
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 
+const logOut = () => {
+  firebase.auth().signOut().then(() => {
+    document.querySelector('.error').innerHTML = 'Cierre de sesion exitoso';
+    // Sign-out successful.
+  }).catch((error) => {
+    document.querySelector('.error').innerHTML = error.message;
+  });
+};
 
+const emailVerification = () => {
+  const user = firebase.auth().currentUser;
 
-export function authGoogle() {
-  var provider = new firebase.auth.GoogleAuthProvider();
-  authentication(provider);
-}
+  user.sendEmailVerification().then(() => {
+    // Email sent.
+    document.querySelector('.error').innerHTML = 'Tú correo de verificación fue enviado';
+  }).catch((error) => {
+    document.querySelector('.error').innerHTML = error.message;
+  });
+};
+
+export const passwordRecovery = () => {
+  const auth = firebase.auth();
+  const emailAddress = document.querySelector('#email3').value;
+
+  auth.sendPasswordResetEmail(emailAddress).then(() => {
+    document.querySelector('.error').innerHTML = 'Tu email fue enviado con exito';
+    // Email sent.
+  }).catch((error) => {
+    // An error happened.
+    document.querySelector('.error').innerHTML = error.message;
+  });
+};
 
 function authentication(provider) {
   firebase.auth()
     .signInWithPopup(provider)
     .then((result) => {
       /** @type {firebase.auth.OAuthCredential} */
-      var credential = result.credential;
+      const credential = result.credential;
 
       // This gives you a Google Access Token. You can use it to access the Google API.
-      var token = credential.accessToken;
+      const token = credential.accessToken;
       // The signed-in user info.
-      var user = result.user;
-      // ...
+      const user = result.user;
+      document.querySelector('.error').innerHTML = '';
+      const database = firebase.firestore();
+      return database.collection('user').doc(user.uid).set({
+        nombre: user.displayName,
+        email: user.email,
+      });
     }).catch((error) => {
       // Handle Errors here.
-      var errorCode = error.code;
-      var errorMessage = error.message;
+      const errorCode = error.code;
+      const errorMessage = error.message;
       // The email of the user's account used.
-      var email = error.email;
+      const email = error.email;
       // The firebase.auth.AuthCredential type that was used.
-      var credential = error.credential;
+      const credential = error.credential;
       // ...
+      document.querySelector('.error').innerHTML = errorCode + errorMessage + email + credential;
     });
 }
-
+export function authGoogle() {
+  const provider = new firebase.auth.GoogleAuthProvider();
+  authentication(provider);
+}
 
 export const createAccount = () => {
-  let username = document.getElementById('username').value;
-  let email = document.getElementById('email').value;
-  let password = document.getElementById('password').value;
+  const username = document.getElementById('username').value;
+  const email = document.getElementById('email').value;
+  const password = document.getElementById('password').value;
+  const biograph = document.getElementById('bio').value;
 
   firebase.auth().createUserWithEmailAndPassword(email, password)
-    .then((userCredential) => {    
-      // Signed in
-     emailVerification();
-     alert("Tú correo de verificación fue enviado") 
-      
-      var user = userCredential.user;
+    .then((user) => {
+      const database = firebase.firestore();
+      return database.collection('user').doc(user.uid).set({
+        nombre: username,
+        email,
+        bio: biograph,
+      });
       // ...
     })
+    .then(() => {
+      emailVerification();
+      /* const user = userCredential.user; */
+    })
     .catch((error) => {
-      var errorCode = error.code;
-      var errorMessage = error.message;
-      // ..
+      document.querySelector('.error').innerHTML = error.message;
     });
 };
 
 /* lo nuevo */
 export const signIn = () => {
-  let email2 = document.getElementById('email2').value;
-  let password2 = document.getElementById('password2').value;
+  const email2 = document.getElementById('email2').value;
+  const password2 = document.getElementById('password2').value;
 
   firebase.auth().signInWithEmailAndPassword(email2, password2)
     .then((userCredential) => {
-      // Signed in  
-      // recuperar2();
-      var user = userCredential.user;
+      // Signed in
+      const user = userCredential.user;
+      document.querySelector('.error').innerHTML = '';
+
       // ...
     })
     .catch((error) => {
-      var errorCode = error.code;
-      var errorMessage = error.message;
+      document.querySelector('.error').innerHTML = error.message;
     });
 };
 
-export const observador = () => {
+const aparece = (user) => {
+  const contenido = document.getElementById('contenido');
+  if (user.emailVerified && contenido) {
+    contenido.innerHTML = `
+    <h2>Bienvenido ${user.email} </h2>
+    
+    <button id="logOut">Cerrar sesión</button>`;
 
-  firebase.auth().onAuthStateChanged(function (user) {
+    const out = document.getElementById('logOut');
+    out.addEventListener('click', () => {
+      logOut();
+      contenido.style.display = 'none';
+    });
+  }
+};
+
+export const observador = () => {
+  firebase.auth().onAuthStateChanged((user) => {
     if (user) {
       // User is signed in.
       console.log('existe usuario activo');
       aparece(user);
-      let displayName = user.displayName;
-      let email = user.email;
-      console.log("***********");
+      const displayName = user.displayName;
+      const email = user.email;
+      console.log('***********');
       console.log(user.emailVerified);
-      console.log("***********");
+      console.log('***********');
       console.log(user.displayName);
-      let emailVerified = user.emailVerified;
-      let photoURL = user.photoURL;
-      let isAnonymous = user.isAnonymous;
-      let uid = user.uid;
-      let providerData = user.providerData;
+      const emailVerified = user.emailVerified;
+      const photoURL = user.photoURL;
+      const isAnonymous = user.isAnonymous;
+      const uid = user.uid;
+      const providerData = user.providerData;
     } else {
       // No user is signed in
       console.log('no existe usuario activo');
@@ -106,52 +160,3 @@ export const observador = () => {
 };
 
 observador();
-
-const aparece = (user) => {
-  let contenido = document.getElementById('contenido');
-  if (user.emailVerified){
-  contenido.innerHTML = `
-    <h2>Bienvenido ${user.email} </h2>
-
-    <button id="logOut">Cerrar sesión</button>`
-
-  let out = document.getElementById('logOut');
-  out.addEventListener('click', () => {
-    logOut();
-  });
-  }
-}
-
-const logOut = () => {
-  firebase.auth().signOut().then(() => {
-    console.log("Saliendo..");
-    // Sign-out successful.
-  }).catch((error) => {
-    // An error happened.
-    console.log(error);
-  });
-}
-
-const emailVerification = () => {
-var user = firebase.auth().currentUser;
-
-user.sendEmailVerification().then(function() {
-  // Email sent.
-  console.log('email enviado');
-}).catch(function(error) {
-  // An error happened.
-  console.log(error);
-});
-}
-
-export const passwordRecovery  = () => {
-  var auth = firebase.auth();
-  let emailAddress = document.querySelector('#email3').value;
-  
-  auth.sendPasswordResetEmail(emailAddress).then(function() {
-   alert("Tu email fue enviado con exito") 
-   // Email sent.
-  }).catch(function(error) {
-    // An error happened.
-  });
-}
