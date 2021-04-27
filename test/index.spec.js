@@ -1,6 +1,6 @@
 // importamos la funcion que vamos a testear
 import { myFunction } from '../src/lib/index.js';
-import { createAccount } from '../src/lib/firebase/firebase-auth.js';
+import { home } from '../src/lib/views/templateHome.js';
 
 describe('myFunction', () => {
   it('debería ser una función', () => {
@@ -8,8 +8,9 @@ describe('myFunction', () => {
   });
 });
 
-describe('createAccount', () => {
-  it('debería ser una función', () => {
-    expect(typeof createAccount).toBe('function');
+describe('home', () => {
+  it('should render without crashing', () => {
+    const initContent = home();
+    expect(initContent instanceof HTMLElement).toBe(true);
   });
 });

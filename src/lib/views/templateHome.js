@@ -2,25 +2,26 @@ import { authGoogle, signIn } from '../firebase/firebase-auth.js';
 
 export const home = () => {
   const divHome = document.createElement('div');
+  divHome.classList.add('containerHome');
   const viewHome = `
     <img src="./lib/images/logo.png" class="title" alt="">
-    <button type="button" id="google">Ingresa con google</button>
-    
-    <h2>Ingreso</h2>
+    <img src="./lib/images/google.png" id="google" alt="">
+   
+    <h4>o</h4>
 
-    <input type="email" id ="email2" placeholder="Tú email aquí">
-    <input type="password" id ="password2" placeholder="Tú contraseña aquí">
-    <button id="send2">Ingresar</button>
+    <input type="email" id ="email2" placeholder="Correo electrónico">
+    <input type="password" id ="password2" placeholder="Contraseña">
+    <a href="#/recuperar">¿Olvidaste tu contraseña?</a>
     <p class="error"></p>
 
-    <a href="#/recuperar">¿Olvidaste tu contraseña?</a>
 
-    <h2>¿No tienes una cuenta?</h2>
-    <a href="#/personajes">Regístrate aquí</a>
+    <button id="send2">Iniciar sesión</button>
 
+    <h4>¿No tienes cuenta?</h4>
+    <a href="#/personajes" class="boton">Regístrate aquí</a>
 
-    <div id="contenido"></div>
-    <img src="./lib/images/footer.png" class="title" alt="">`;
+    <img src="./lib/images/footer.png" class="title" alt="">
+    <div id="contenido"></div>`;
 
   divHome.innerHTML = viewHome;
 
@@ -35,3 +36,5 @@ export const home = () => {
 
   return divHome;
 };
+
+// <button type="button" id="google2">Inicia sesión con google</button>

@@ -4,27 +4,62 @@
 
 body {
     background-image: url(./lib/images/background.png);
+    background-repeat: no-repeat;
+    background-size: cover;
    /*  background-repeat: round; ESTO VA PARA WEB, no funciona en mobile */
 }
+a {
+    text-decoration: none;
+    color: orangered;
+    font-weight: bold;
+}
 .title {
-    width: 40%;
-    display: block;
-    margin: auto;
+    width: 70%;
+}
+/* flexbox */
+.containerHome {
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    height: 100vh;
+    justify-content: center;
+    text-align: center;
 }
 #google {
-    background-color: antiquewhite;
-    width: 25%;
-    filter: drop-shadow(1px 1px 2px gray);
-    display: block;
-    margin: auto;
+    margin-top: 3%;
 }
+
 #img-error {
-    display: block;
-    margin: auto;
     width: 50%;
 }
 .error {
-    color: orangered;
+    color: gray;
     text-align: center;
     font-weight: bold;
+}
+#send, 
+#send2,
+#send3 {
+    padding: 1% 3%;
+    color: orangered;
+    background-color: #BDC1C0;
+    border-style: none;
+    border-radius: 6%;
+    filter: drop-shadow(1px 1px 2px gray);
+    font-weight: bold;
+    margin: 2%;
+}
+.boton {
+    padding: 1% 2%;
+    color: orangered;
+    border-style: solid;
+    border-color: #BDC1C0;
+    border-radius: 6%;
+}
+
+input {
+    padding: 1% 16% 1% 1%;
+    filter: drop-shadow(1px 2px 2px gray);
+    border: 1px solid black;
+    margin: 1%;
 }

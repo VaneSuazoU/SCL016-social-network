@@ -47,10 +47,10 @@ function authentication(provider) {
     .signInWithPopup(provider)
     .then((result) => {
       /** @type {firebase.auth.OAuthCredential} */
-      const credential = result.credential;
+      /*  const credential = result.credential; */
 
       // This gives you a Google Access Token. You can use it to access the Google API.
-      const token = credential.accessToken;
+      /*  const token = credential.accessToken; */
       // The signed-in user info.
       const user = result.user;
       document.querySelector('.error').innerHTML = '';
@@ -107,9 +107,9 @@ export const signIn = () => {
   const password2 = document.getElementById('password2').value;
 
   firebase.auth().signInWithEmailAndPassword(email2, password2)
-    .then((userCredential) => {
+    .then(() => {
       // Signed in
-      const user = userCredential.user;
+      /*  const user = userCredential.user; */
       document.querySelector('.error').innerHTML = '';
 
       // ...
@@ -139,11 +139,11 @@ export const observador = () => {
   firebase.auth().onAuthStateChanged((user) => {
     if (user) {
       // User is signed in.
-      console.log('existe usuario activo');
+      /* console.log('existe usuario activo'); */
       aparece(user);
-      const displayName = user.displayName;
-      const email = user.email;
-      console.log('***********');
+      /* const displayName = user.displayName;
+      const email = user.email; */
+      /* console.log('***********');
       console.log(user.emailVerified);
       console.log('***********');
       console.log(user.displayName);
@@ -151,10 +151,10 @@ export const observador = () => {
       const photoURL = user.photoURL;
       const isAnonymous = user.isAnonymous;
       const uid = user.uid;
-      const providerData = user.providerData;
+      const providerData = user.providerData; */
     } else {
       // No user is signed in
-      console.log('no existe usuario activo');
+      /*  console.log('no existe usuario activo'); */
     }
   });
 };

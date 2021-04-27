@@ -33,6 +33,10 @@ export const changeRoute = (hash) => {
     return showTemplate(hash);
   } if (hash === '#/personajes') {
     return showTemplate(hash);
+  } if (hash === '#/recuperar') {
+    return showTemplate(hash);
+  } if (hash === '#/menu') {
+    return showTemplate(hash);
   }
   return showTemplate(hash);
 };
