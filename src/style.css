@@ -6,7 +6,6 @@ body {
     background-image: url(./lib/images/background.png);
     background-repeat: no-repeat;
     background-size: cover;
-   /*  background-repeat: round; ESTO VA PARA WEB, no funciona en mobile */
 }
 a {
     text-decoration: none;
@@ -14,16 +13,26 @@ a {
     font-weight: bold;
 }
 .title {
-    width: 70%;
+    width: 50%;
+}
+.headerHome,
+.footer2 {
+    width: 100%;
+    height: 100%;
 }
 /* flexbox */
-.containerHome {
+.container {
     display: flex;
     flex-flow: column;
     align-items: center;
-    height: 100vh;
+    min-height: 100vh;
     justify-content: center;
     text-align: center;
+}
+.containerHome {
+    background-image: url(./lib/images/group.png);
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 #google {
     margin-top: 3%;
@@ -32,7 +41,7 @@ a {
 #img-error {
     width: 50%;
 }
-.error {
+.result {
     color: gray;
     text-align: center;
     font-weight: bold;
@@ -49,7 +58,7 @@ a {
     font-weight: bold;
     margin: 2%;
 }
-.boton {
+.button {
     padding: 1% 2%;
     color: orangered;
     border-style: solid;

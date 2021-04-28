@@ -1,6 +1,6 @@
 // importamos la funcion que vamos a testear
 import { myFunction } from '../src/lib/index.js';
-import { home } from '../src/lib/views/templateHome.js';
+import { logIn } from '../src/lib/views/templateLogIn.js';
 
 describe('myFunction', () => {
   it('debería ser una función', () => {
@@ -8,9 +8,9 @@ describe('myFunction', () => {
   });
 });
 
-describe('home', () => {
+describe('logIn', () => {
   it('should render without crashing', () => {
-    const initContent = home();
-    expect(initContent instanceof HTMLElement).toBe(true);
+    const divLogIn = logIn();
+    expect(divLogIn instanceof HTMLElement).toBe(true);
   });
 });

@@ -1,9 +1,9 @@
 import { passwordRecovery } from '../firebase/firebase-auth.js';
 
-export const recuperar = () => {
-  const divRecuperar = document.createElement('div');
-  divRecuperar.classList.add('containerHome');
-  const viewRecuperar = `
+export const recoverPassword = () => {
+  const divRecoverPassword = document.createElement('div');
+  divRecoverPassword.classList.add('container');
+  const viewRecoverPassword = `
   <img src="./lib/images/logo.png" class="title" alt="">
   <h1>¿Olvidaste tú contraseña?</h1>
 
@@ -13,17 +13,17 @@ export const recuperar = () => {
     <button id="send3">Enviar</button>
     <p class="error"></p>
 
-    <a href="#/" class="boton">Volver al inicio de sesión</a>
+    <a href="#/" class="button">Volver al inicio de sesión</a>
 
     <img src="./lib/images/footer.png" class="title" alt="">
     `;
 
-  divRecuperar.innerHTML = viewRecuperar;
+  divRecoverPassword.innerHTML = viewRecoverPassword;
 
-  const recover = divRecuperar.querySelector('#send3');
-  recover.addEventListener('click', () => {
+  const bottonToRecover = divRecoverPassword.querySelector('#send3');
+  bottonToRecover.addEventListener('click', () => {
     passwordRecovery();
   });
 
-  return divRecuperar;
+  return divRecoverPassword;
 };

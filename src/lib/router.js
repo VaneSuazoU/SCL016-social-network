@@ -1,8 +1,8 @@
-import { home } from './views/templateHome.js';
-import { personajes } from './views/templatePersonajes.js';
+import { logIn } from './views/templateLogIn.js';
+import { signIn } from './views/templateSignIn.js';
 import { error } from './views/templateError.js';
-import { recuperar } from './views/templateRecuperar.js';
-import { menu } from './views/templateMenu.js';
+import { recoverPassword } from './views/templatePassword.js';
+import { home } from './views/templateHome.js';
 
 const showTemplate = (hash) => {
   const containerRoot = document.getElementById('root');
@@ -12,16 +12,16 @@ const showTemplate = (hash) => {
     case '':
     case '#':
     case '#/':
+      containerRoot.appendChild(logIn());
+      break;
+    case '#/signIn':
+      containerRoot.appendChild(signIn());
+      break;
+    case '#/recoverPassword':
+      containerRoot.appendChild(recoverPassword());
+      break;
+    case '#/home':
       containerRoot.appendChild(home());
-      break;
-    case '#/personajes':
-      containerRoot.appendChild(personajes());
-      break;
-    case '#/recuperar':
-      containerRoot.appendChild(recuperar());
-      break;
-    case '#/menu':
-      containerRoot.appendChild(menu());
       break;
     default:
       containerRoot.appendChild(error());
@@ -29,14 +29,5 @@ const showTemplate = (hash) => {
 };
 
 export const changeRoute = (hash) => {
-  if (hash === '#/') {
-    return showTemplate(hash);
-  } if (hash === '#/personajes') {
-    return showTemplate(hash);
-  } if (hash === '#/recuperar') {
-    return showTemplate(hash);
-  } if (hash === '#/menu') {
-    return showTemplate(hash);
-  }
-  return showTemplate(hash);
+  showTemplate(hash);
 };

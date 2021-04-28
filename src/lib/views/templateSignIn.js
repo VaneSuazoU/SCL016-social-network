@@ -1,9 +1,9 @@
 import { createAccount } from '../firebase/firebase-auth.js';
 
-export const personajes = () => {
-  const divPersonajes = document.createElement('div');
-  divPersonajes.classList.add('containerHome');
-  const viewPersonajes = `
+export const signIn = () => {
+  const divsignIn = document.createElement('div');
+  divsignIn.classList.add('container');
+  const viewsignIn = `
     <img src="./lib/images/logo.png" class="title" alt="">
     <h2>Regístrate, mira y comparte memes</h2>
     
@@ -15,20 +15,20 @@ export const personajes = () => {
     <h6>Al registrarte, aceptas políticas y condiciones de uso.</h6>
 
     <button id="send">Registrar</button>
-    <p class="error"></p>
+    <p class="result"></p>
     
     <h4>¿Tienes cuenta?</h4>
-    <a href="#/" class="boton">Inicia sesión</a>
+    <a href="#/" class="button">Inicia sesión</a>
     
     <img src="./lib/images/footer.png" class="title" alt="">
     `;
 
-  divPersonajes.innerHTML = viewPersonajes;
+  divsignIn.innerHTML = viewsignIn;
 
-  const send = divPersonajes.querySelector('#send');
+  const send = divsignIn.querySelector('#send');
   send.addEventListener('click', () => {
     createAccount();
   });
 
-  return divPersonajes;
+  return divsignIn;
 };
