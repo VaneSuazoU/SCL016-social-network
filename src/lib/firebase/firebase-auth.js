@@ -108,7 +108,7 @@ export const toSignIn = () => {
 export const aparece = (user) => {
   if (user.emailVerified) {
     /*     window.location.hash = '#/muro';
- */ window.open('#/home', '_self');
+ */ window.open('#/post', '_self');
   }
 };
 

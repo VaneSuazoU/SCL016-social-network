@@ -4,6 +4,7 @@ import { signIn } from '../src/lib/views/templateSignIn.js';
 import { error } from '../src/lib/views/templateError.js';
 import { recoverPassword } from '../src/lib/views/templatePassword.js';
 import { home } from '../src/lib/views/templateHome.js';
+import { perfil } from '../src/lib/views/templatePerfil.js';
 
 describe('logIn', () => {
   const divLogIn = logIn();
@@ -52,5 +53,15 @@ describe('home', () => {
   });
   it('should render without crashing', () => {
     expect(divHome instanceof HTMLElement).toBe(true);
+  });
+});
+
+describe('perfil', () => {
+  const divPerfil = perfil();
+  it('should be a function', () => {
+    expect(typeof perfil).toBe('function');
+  });
+  it('should render without crashing', () => {
+    expect(divPerfil instanceof HTMLElement).toBe(true);
   });
 });
