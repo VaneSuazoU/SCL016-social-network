@@ -2,7 +2,7 @@ import { logOut } from '../firebase/firebase-auth.js';
 
 export const editPost = () => {
   const divEditPost = document.createElement('div');
-  divEditPost.classList.add('container', 'containerHome');
+  divEditPost.classList.add('container');
   const viewEditPost = `
   
   <img src="./lib/images/logout.png" id="toLogOut" alt="">
@@ -16,7 +16,7 @@ export const editPost = () => {
   <p class="result"></p>
   <ul id="cafe-list"></ul>
 
-  <a href="#/prueba" class="button">Ir al perfil</a>
+  <a href="#/profile" class="button">Ir al perfil</a>
   <a href="#/post" class="button">Ir al muro</a>
     `;
 
@@ -43,6 +43,7 @@ export const editPost = () => {
     titulo.textContent = doc.data().titulo;
     titulo.contentEditable = true;
     contenido.textContent = doc.data().contenido;
+    contenido.contentEditable = true;
     cross.textContent = 'x';
     saveChanges.textContent = 'guardar cambios';
 
@@ -61,12 +62,12 @@ export const editPost = () => {
     })
     // updating data 
     saveChanges.addEventListener('click', (e) => {
-     const user = firebase.auth().currentUser; 
+     const user = firebase.auth().currentUser;
       let id = e.target.parentElement.getAttribute('data-id');
       database.collection('publicaciones').doc(id).update({
         titulo: e.target.parentElement.querySelector('.titulo').innerHTML,
         contenido: e.target.parentElement.querySelector('.contenido').innerHTML,
-        usuario: user.email
+        usuario: user.displayName
       }).then( () => {
         document.querySelector('.result').innerHTML = "Contenido actualizado";
         setTimeout( () => {
@@ -83,7 +84,7 @@ export const editPost = () => {
     database.collection('publicaciones').add({
       titulo: form.titulo.value,
       contenido: form.contenido.value,
-      usuario: user.email
+      usuario: user.displayName
     });
     form.titulo.value = '';
     form.contenido.value = '';

@@ -3,7 +3,7 @@ import { signIn } from './views/templateSignIn.js';
 import { error } from './views/templateError.js';
 import { recoverPassword } from './views/templatePassword.js';
 import { editPost } from './views/templateEditPost.js';
-import { perfil } from './views/templatePerfil.js';
+import { profile } from './views/templateProfile.js';
 import { post } from './views/templatePosts.js';
 
 const showTemplate = (hash) => {
@@ -25,8 +25,8 @@ const showTemplate = (hash) => {
     case '#/editPost':
       containerRoot.appendChild(editPost());
       break;
-    case '#/perfil':
-      containerRoot.appendChild(perfil());
+    case '#/profile':
+      containerRoot.appendChild(profile());
       break;
     case '#/post':
       containerRoot.appendChild(post());

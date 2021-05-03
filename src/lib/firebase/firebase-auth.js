@@ -107,8 +107,7 @@ export const toSignIn = () => {
 
 export const aparece = (user) => {
   if (user.emailVerified) {
-    /*     window.location.hash = '#/muro';
- */ window.open('#/post', '_self');
+ window.open('#/post', '_self');
   }
 };
 
@@ -116,14 +115,9 @@ export const observer = () => {
   firebase.auth().onAuthStateChanged((user) => {
     if (user) {
       // User is signed in.
-      /*  console.log('existe usuario activo'); */
       aparece(user);
       /* const displayName = user.displayName;
-      const email = user.email; */
-      /* console.log('***********');
-      console.log(user.emailVerified);
-      console.log('***********');
-      console.log(user.displayName);
+      const email = user.email;
       const emailVerified = user.emailVerified;
       const photoURL = user.photoURL;
       const isAnonymous = user.isAnonymous;
@@ -132,7 +126,6 @@ export const observer = () => {
     } else {
       // No user is signed in
       window.open('#/', '_self');
-      /* console.log('no existe usuario activo'); */
     }
   });
 };
