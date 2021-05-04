@@ -3,6 +3,7 @@ import { signIn } from './views/templateSignIn.js';
 import { error } from './views/templateError.js';
 import { recoverPassword } from './views/templatePassword.js';
 import { home } from './views/templateHome.js';
+import { newpost } from './views/templateNewpost.js';
 
 const showTemplate = (hash) => {
   const containerRoot = document.getElementById('root');
@@ -22,6 +23,9 @@ const showTemplate = (hash) => {
       break;
     case '#/home':
       containerRoot.appendChild(home());
+      break;
+    case '#/newpost':
+      containerRoot.appendChild(newpost());
       break;
     default:
       containerRoot.appendChild(error());

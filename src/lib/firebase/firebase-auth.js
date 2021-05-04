@@ -59,7 +59,7 @@ function authentication(provider) {
       document.querySelector('.result').innerHTML = errorCode + errorMessage + email + credential;
     });
 }
-export function authGoogle() {
+export const authGoogle = () => {
   const provider = new firebase.auth.GoogleAuthProvider();
   authentication(provider);
 }

@@ -12,6 +12,9 @@ a {
     color: orangered;
     font-weight: bold;
 }
+#newPost {
+    width: 20%;
+}
 .title {
     width: 50%;
 }

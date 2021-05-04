@@ -4,6 +4,7 @@ import { signIn } from '../src/lib/views/templateSignIn.js';
 import { error } from '../src/lib/views/templateError.js';
 import { recoverPassword } from '../src/lib/views/templatePassword.js';
 import { home } from '../src/lib/views/templateHome.js';
+import { newpost } from '../src/lib/views/templateNewpost.js';
 
 describe('logIn', () => {
   const divLogIn = logIn();
@@ -52,5 +53,15 @@ describe('home', () => {
   });
   it('should render without crashing', () => {
     expect(divHome instanceof HTMLElement).toBe(true);
+  });
+});
+
+describe('newpost', () => {
+  const divModal = newpost();
+  it('should be a function', () => {
+    expect(typeof v).toBe('function');
+  });
+  it('should render without crashing', () => {
+    expect(divModal instanceof HTMLElement).toBe(true);
   });
 });
