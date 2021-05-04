@@ -10,16 +10,22 @@ body {
 .posts {
     background-color:white;
 }
+.papelera, 
+.postMenu {
+    width: 20px;
+}
+.imgPost {
+    width: 20%;
+}
 a {
     text-decoration: none;
     color: orangered;
     font-weight: bold;
 }
 .title {
-    width: 50%;
+    width: 18rem;
 }
-.headerHome,
-.footer2 {
+.headerHome{
     width: 100%;
     height: 100%;
 }
@@ -47,7 +53,7 @@ a {
     align-self: flex-end;
 }
 .item {
-    width: 9%;
+    width: 3rem;
     margin: 1%;
 }
 .username {
@@ -60,6 +66,7 @@ a {
     background-size: cover;
     display: flex;
     justify-content: space-around;
+    width: -webkit-fill-available;
 }
 .header {
     display: flex;
@@ -95,7 +102,8 @@ a {
 }
 
 input {
-    padding: 1% 16% 1% 1%;
+    /* padding: 1% 16% 1% 1%; */
+    padding: 1rem 3rem 1rem 1rem;
     filter: drop-shadow(1px 2px 2px gray);
     border: 1px solid black;
     margin: 1%;

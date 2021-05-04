@@ -1,6 +1,6 @@
 import { logOut } from '../firebase/firebase-auth.js';
 
-export const editPost = () => {
+export const editPosts = () => {
   const divEditPost = document.createElement('div');
   divEditPost.classList.add('container');
   const viewEditPost = `
@@ -13,6 +13,29 @@ export const editPost = () => {
     <input type="text" name="contenido" placeholder="contenido">
     <button>Publicar</button>
   </form>
+
+  <!-- contenido del nuevo post -->
+  <main id="newPostContentDiv" class="newPostDiv">
+
+  <div class="newPostContent">
+
+      <header class="newPost">
+        Adjunta una foto
+        <img src="./lib/images/plus.webp" alt="adjuntarArchivo" id="selectFile" class="selectFile">
+        <input type="file" id="newPostImgFile" class="NewPostImg" value="">
+      </header>
+
+      <div class="postImgDiv">
+        <img src="" class="imgNewPost" id="imgToPost">
+      </div>
+
+      <textarea id="newPostText" name="newPostText" class="newPostTextInput" rows="4" cols="50" placeholder="Escribe aquí tu mensaje.."></textarea>
+      
+      <input type="submit" value="Publicar" class="postButton" id="publishBtn">
+  </div>
+
+  </main>
+
   <p class="result"></p>
   <ul id="cafe-list"></ul>
 

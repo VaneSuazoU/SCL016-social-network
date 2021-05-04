@@ -24,7 +24,7 @@ export const post = () => {
 
   const profile = divPost.querySelector('#profile');
   profile.addEventListener('click', () => {
-    window.open('#/profile', '_self');
+    window.open('#/home', '_self');
   });
 
   const out = divPost.querySelector('#toLogOut');
@@ -45,8 +45,8 @@ export const post = () => {
 
 
     li.setAttribute('data-id', doc.id);
-    /* usuario.textContent = doc.data().usuario;
-    usuario.classList.add('username'); */
+    usuario.textContent = doc.data().usuario;
+    usuario.classList.add('username');
     titulo.textContent = doc.data().titulo;
     contenido.textContent = doc.data().contenido;
     like.src = "./lib/images/liked.png";
@@ -67,11 +67,11 @@ export const post = () => {
     let isLike = false;
     let idLike;
 
-    // obtener usuario que hizo la publicacion 
+/*     // obtener usuario que hizo la publicacion 
     database.collection("user").where('usuario', '==', user.displayName).get().then(() => {
       usuario.textContent = doc.data();
       console.log(doc.data())
-    })
+    }) */
 
     // count likes
     database.collection("likes").where('post', '==', doc.id).get().then((likeResult) => {
