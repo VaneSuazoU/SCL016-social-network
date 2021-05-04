@@ -23,3 +23,7 @@ export const newpost = () => {
 
   return divNewpost;
 };
+
+export const newPost = () => {
+  
+}

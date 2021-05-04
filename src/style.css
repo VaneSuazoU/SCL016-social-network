@@ -12,9 +12,14 @@ a {
     color: orangered;
     font-weight: bold;
 }
-#newPost {
+#directacces {
+    display: flex;
+}
+
+#home, #newPost, #profile {
     width: 20%;
 }
+
 .title {
     width: 50%;
 }

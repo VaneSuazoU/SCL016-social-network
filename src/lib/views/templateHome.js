@@ -9,8 +9,10 @@ export const home = () => {
   
   <h1> Aquí van los posts  </h1>
   <p class="result"></p>
-  <footer>
-  <a href="#/newpost" id="show-modal"><img src="./lib/images/añadir.png" id="newPost"></a>
+  <footer id="directacces">
+  <a href="#/home"><img src="./lib/images/home.png" id="home"></a>
+  <a href="#/newpost"><img src="./lib/images/añadir.png" id="newPost"></a>
+  <a href="#/profile"><img src="./lib/images/perfil.png" id="profile"></a>
   </footer>`;
   
   divHome.innerHTML = viewHome;
