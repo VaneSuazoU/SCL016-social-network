@@ -1,8 +1,8 @@
 import {uploadImg} from '../firebase/firebase-firestore.js';
 
 export const newpost = () => {
-  const divNewpost = document.createElement('div');
-  divNewpost.classList.add('container', 'containerHome');
+  const divPost = document.createElement('div');
+  divPost.classList.add('container', 'containerHome');
   const viewNewpost = `
 
   <a href="#/home" class="close-modal">x</a>
@@ -11,9 +11,9 @@ export const newpost = () => {
   <textarea id="textBox" cols="30" rows="10"></textarea>
   <button id="uploadPost">Cargar</button>
   `;
-  divNewpost.innerHTML = viewNewpost;
+  divPost.innerHTML = viewNewpost;
 
-  const uploadPost = divNewpost.querySelector('#uploadPost');
+  const uploadPost = divPost.querySelector('#uploadPost');
   uploadPost.addEventListener('click', () => {
     uploadImg();
   });
@@ -21,7 +21,7 @@ export const newpost = () => {
 
 
 
-  return divNewpost;
+  return divPost;
 };
 
 export const newPost = () => {
