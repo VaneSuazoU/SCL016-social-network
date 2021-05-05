@@ -1,85 +1,108 @@
 import { logOut } from '../firebase/firebase-auth.js';
+import { editPosts } from './templateEditPost.js';
 
-export const profile = () => {
-  const divProfile = document.createElement('div');
-  divProfile.classList.add('container', 'posts');
-  const viewProfile = `
+export const profileView = () => {
+  const divPerfil = document.createElement('div');
+  divPerfil.classList.add('container', 'posts');
+  const viewPerfil = `
+    <img src="./lib/images/titulo.png" class="header" alt="">
+    <img src="./lib/images/logout.png" id="toLogOut" alt="">
+    <h1>Tus publicaciones</h1>
+
+    <main id="wallContentDiv" class="wallContent"></main>
   
-  <img src="./lib/images/titulo.png" class="header" alt="">
-  <img src="./lib/images/logout.png" id="toLogOut" alt="">
-  <h1>Perfil</h1>
+    <div id="footer">
+    <img src="./lib/images/home.webp" class="item" id="wall" alt="">
+    <img src="./lib/images/plus.webp" class="item" id="add" alt="">
+    <img src="./lib/images/profile.png" class="item" id="profile" alt="">
+    </div>`;
 
-  <h3>Tus publicaciones</h3>
+  divPerfil.innerHTML = viewPerfil;
+  // Variables globales a utilizar
+  const firestore = firebase.firestore();
+  const user = firebase.auth().currentUser;
+  const profile = divPerfil.querySelector('#profile');
+  const out = divPerfil.querySelector('#toLogOut');
+  const wall = divPerfil.querySelector('#wall');
+  const add = divPerfil.querySelector('#add');
 
-  <div class="contenedor-post dropdown">
-  <ul id="cafe-list"></ul>
-  </div>
-
-  <div id="footer">
-  <img src="./lib/images/home.webp" class="item" id="muro" alt="">
-  <img src="./lib/images/plus.webp" class="item" id="add" alt="">
-  <img src="./lib/images/profile.png" class="item" id="profile" alt="">
-  </div>
-    `;
-
-  divProfile.innerHTML = viewProfile;
-
-  const out = divProfile.querySelector('#toLogOut');
-  out.addEventListener('click', () => {
-    logOut();
-  });
-
-  const muro = divProfile.querySelector('#muro');
-  muro.addEventListener('click', () => {
-    window.open('#/post', '_self');
-  });
-
-  const profile = divProfile.querySelector('#profile');
   profile.addEventListener('click', () => {
     window.open('#/profile', '_self');
   });
-
-  const add = divProfile.querySelector('#add');
+  out.addEventListener('click', () => {
+    logOut();
+  });
+  wall.addEventListener('click', () => {
+    window.open('#/home', '_self');
+  });
   add.addEventListener('click', () => {
-    window.open('#/editPost', '_self');
+    window.open('#/newPost', '_self');
   });
 
-  const cafeList = divProfile.querySelector('#cafe-list');
-/*   const user = firebase.auth().currentUser; */
+  // función para ordenar los posts por hora de publicación y crear el contenido de los posts
+  firestore.collection('posts').where('userName', '==', 'meme time').get().then((snapshot) => {
+    divPerfil.querySelector('#wallContentDiv').innerHTML = '';
+    snapshot.forEach((doc) => {
+      // contenedor de los posts
+      const home = divPerfil.querySelector('#wallContentDiv');
+      const post = document.createElement('div');
+      const postImage = document.createElement('img');
+      const postDescription = document.createElement('p');
+      const options = document.createElement('div');
 
-  const renderCafe = (doc) => {
-    let li = document.createElement('li');
-    let titulo = document.createElement('span');
-    let contenido = document.createElement('span');
-    let dots = document.createElement('div');
-    dots.classList.add('dropdown');
-    let edit = document.createElement('a');
-    edit.href = '#/editPost';
-    edit.classList.add('dropdown-content');
+      // contenido de los posts
+      post.classList.add('postContainer');
+      postImage.classList.add('postImgs');
+      postImage.src = doc.data().postImage;
+      postDescription.innerHTML = doc.data().message;
 
-    li.setAttribute('data-id', doc.id);
-    titulo.textContent = doc.data().titulo;
-    contenido.textContent = doc.data().contenido;
-    dots.textContent = '...';
-    edit.textContent = 'editar';
+      // orden de los contenedores
+      home.appendChild(post);
+      post.appendChild(postImage);
+      post.appendChild(postDescription);
+      post.appendChild(options);
 
-    li.appendChild(titulo);
-    li.appendChild(contenido);
-    li.appendChild(dots);
-    li.appendChild(edit);
+      const eliminar = document.createElement('img');
+      eliminar.src = './lib/images/delete.png';
+      eliminar.classList.add('options');
+      options.appendChild(eliminar);
 
-    cafeList.appendChild(li);
-  }
+      // eliminar post
+      eliminar.addEventListener('click', (e) => {
+        if (doc.data().userID === user.uid) {
+          e.stopPropagation();
+          const docID = doc.id;
+          firestore
+            .collection('posts')
+            .doc(docID)
+            .delete()
+            .then(() => { })
+            .catch(() => {
+              /* console.error('Error removing document: ', error); */
+            });
+        }
+      });
 
-  // getting data
-  let database = firebase.firestore();
-  database.collection("publicaciones").where('usuario', '==', 'meme time').get().then((snapshot) => {
-    snapshot.docs.forEach((doc) => {
-      renderCafe(doc);
+      // función para editar los post del usuario activo
+      const editPost = document.createElement('img');
+      editPost.classList.add('options');
+      editPost.setAttribute('src', './lib/images/edit.png');
+      options.appendChild(editPost);
+
+      // Función para enviar a editar post
+      const redirection = (docID, message, postImages) => {
+        const root = document.getElementById('root');
+        root.innerHTML = '';
+        root.appendChild(editPosts(docID, message, postImages));
+      };
+
+      editPost.onclick = () => {
+        const docID = doc.id;
+        const message = doc.data().message;
+        const postImg = doc.data().postImage;
+        redirection(docID, message, postImg);
+      };
     });
   });
-
-
-  return divProfile;
+  return divPerfil;
 };
-

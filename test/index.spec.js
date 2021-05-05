@@ -3,8 +3,11 @@ import { logIn } from '../src/lib/views/templateLogIn.js';
 import { signIn } from '../src/lib/views/templateSignIn.js';
 import { error } from '../src/lib/views/templateError.js';
 import { recoverPassword } from '../src/lib/views/templatePassword.js';
-import { home } from '../src/lib/views/templateHome.js';
-import { perfil } from '../src/lib/views/templatePerfil.js';
+import { posts } from '../src/lib/views/templateHome.js';
+import { profileView } from '../src/lib/views/templateProfile.js';
+import { newPost } from '../src/lib/views/templateNewPost.js';
+import { editPosts } from '../src/lib/views/templateEditPost.js';
+import { logOut } from '../src/lib/firebase/firebase-auth.js';
 
 describe('logIn', () => {
   const divLogIn = logIn();
@@ -46,22 +49,45 @@ describe('recoverPassword', () => {
   });
 });
 
-describe('home', () => {
-  const divHome = home();
+describe('posts', () => {
+  const divHome = posts();
   it('should be a function', () => {
-    expect(typeof home).toBe('function');
+    expect(typeof posts).toBe('function');
   });
   it('should render without crashing', () => {
     expect(divHome instanceof HTMLElement).toBe(true);
   });
 });
 
-describe('perfil', () => {
-  const divPerfil = perfil();
+describe('profileView', () => {
+  const divPerfil = profileView();
   it('should be a function', () => {
-    expect(typeof perfil).toBe('function');
+    expect(typeof profileView).toBe('function');
   });
   it('should render without crashing', () => {
     expect(divPerfil instanceof HTMLElement).toBe(true);
+  });
+});
+describe('newPost', () => {
+  const divNewPost = newPost();
+  it('should be a function', () => {
+    expect(typeof newPost).toBe('function');
+  });
+  it('should render without crashing', () => {
+    expect(divNewPost instanceof HTMLElement).toBe(true);
+  });
+});
+describe('editPosts', () => {
+  const divEditPost = editPosts();
+  it('should be a function', () => {
+    expect(typeof editPosts).toBe('function');
+  });
+  it('should render without crashing', () => {
+    expect(divEditPost instanceof HTMLElement).toBe(true);
+  });
+});
+describe('logOut', () => {
+  it('should be a function', () => {
+    expect(typeof logOut).toBe('function');
   });
 });

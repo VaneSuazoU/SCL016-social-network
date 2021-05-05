@@ -6,7 +6,7 @@ export const logOut = () => {
   });
 };
 
-const emailVerification = () => {
+export const emailVerification = () => {
   const user = firebase.auth().currentUser;
 
   user.sendEmailVerification().then(() => {
@@ -107,7 +107,7 @@ export const toSignIn = () => {
 
 export const aparece = (user) => {
   if (user.emailVerified) {
- window.open('#/post', '_self');
+    window.open('#/home', '_self');
   }
 };
 
@@ -116,13 +116,6 @@ export const observer = () => {
     if (user) {
       // User is signed in.
       aparece(user);
-      /* const displayName = user.displayName;
-      const email = user.email;
-      const emailVerified = user.emailVerified;
-      const photoURL = user.photoURL;
-      const isAnonymous = user.isAnonymous;
-      const uid = user.uid;
-      const providerData = user.providerData; */
     } else {
       // No user is signed in
       window.open('#/', '_self');

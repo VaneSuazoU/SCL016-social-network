@@ -1,7 +1,5 @@
 import { logOut } from '../firebase/firebase-auth.js';
 
-/* ESTO VA A SER EL CREAR PUBLICACION  */
-
 export const newPost = () => {
   const divNewPost = document.createElement('div');
   divNewPost.classList.add('container', 'posts');
@@ -25,7 +23,7 @@ export const newPost = () => {
             <input type="submit" value="Publicar" class="postButton" id="publishBtn">
 
         <div id="footer">
-  <img src="./lib/images/home.webp" class="item" id="muro" alt="">
+  <img src="./lib/images/home.webp" class="item" id="wall" alt="">
   <img src="./lib/images/plus.webp" class="item" id="add" alt="">
   <img src="./lib/images/profile.png" class="item" id="profile" alt="">
   </div>
@@ -39,21 +37,21 @@ export const newPost = () => {
   const addPicNewPost = divNewPost.querySelector('#newPostImgFile');
   const out = divNewPost.querySelector('#toLogOut');
   const profile = divNewPost.querySelector('#profile');
-  const muro = divNewPost.querySelector('#muro');
+  const wall = divNewPost.querySelector('#wall');
   const add = divNewPost.querySelector('#add');
-  
+
   profile.addEventListener('click', () => {
     window.open('#/profile', '_self');
-});
-out.addEventListener('click', () => {
+  });
+  out.addEventListener('click', () => {
     logOut();
-});
-muro.addEventListener('click', () => {
-    window.open('#/post', '_self');
-});
-add.addEventListener('click', () => {
+  });
+  wall.addEventListener('click', () => {
+    window.open('#/home', '_self');
+  });
+  add.addEventListener('click', () => {
     window.open('#/newPost', '_self');
-});
+  });
 
   // función para imprimir imagen en la pantalla
   const showImg = (filePath) => {
@@ -70,7 +68,7 @@ add.addEventListener('click', () => {
       showImg(filePath);
     });
   };
-    // función para agregar imagen a nuevo post del usuario
+  // función para agregar imagen a nuevo post del usuario
   addPicNewPost.addEventListener('change', () => {
     const file = divNewPost.querySelector('#newPostImgFile').files[0];
     const filePath = `postImages/${file.name}${file.lastModified}`;

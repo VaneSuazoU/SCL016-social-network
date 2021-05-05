@@ -2,14 +2,10 @@ import { logIn } from './views/templateLogIn.js';
 import { signIn } from './views/templateSignIn.js';
 import { error } from './views/templateError.js';
 import { recoverPassword } from './views/templatePassword.js';
-/* import { editPosts } from './views/templateEditPost.js'; */
-
-import { perfil } from './views/pruebaProfile.js';
-import { post } from './views/templatePosts.js';
-import { newPost } from './views/prueba3.js';
-import { home } from './views/prueba.js';
-import { editPosts } from './views/prueba2.js';
-
+import { profileView } from './views/templateProfile.js';
+import { newPost } from './views/templateNewPost.js';
+import { posts } from './views/templateHome.js';
+import { editPosts } from './views/templateEditPost.js';
 
 const showTemplate = (hash) => {
   const containerRoot = document.getElementById('root');
@@ -24,27 +20,21 @@ const showTemplate = (hash) => {
     case '#/newPost':
       containerRoot.appendChild(newPost());
       break;
-      case '#/signIn':
+    case '#/signIn':
       containerRoot.appendChild(signIn());
       break;
     case '#/recoverPassword':
       containerRoot.appendChild(recoverPassword());
       break;
-    case '#/perfil':
-      containerRoot.appendChild(perfil());
+    case '#/profile':
+      containerRoot.appendChild(profileView());
       break;
-    case '#/post':
-      containerRoot.appendChild(post());
+    case '#/editPosts':
+      containerRoot.appendChild(editPosts());
       break;
-      case '#/editPost':
-        containerRoot.appendChild(editPost());
-        break;
-        case '#/editPosts':
-          containerRoot.appendChild(editPosts());
-          break;
-      case '#/home':
-        containerRoot.appendChild(home());
-        break;
+    case '#/home':
+      containerRoot.appendChild(posts());
+      break;
     default:
       containerRoot.appendChild(error());
   }

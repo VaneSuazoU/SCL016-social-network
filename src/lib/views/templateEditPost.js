@@ -1,130 +1,71 @@
+import { posts } from './templateHome.js';
 import { logOut } from '../firebase/firebase-auth.js';
 
-export const editPosts = () => {
+export const editPosts = (docID, message, postImage) => {
   const divEditPost = document.createElement('div');
-  divEditPost.classList.add('container');
+  divEditPost.setAttribute('class', 'posts');
   const viewEditPost = `
-  
+  <img src="./lib/images/titulo.png" class="header" alt="">
   <img src="./lib/images/logout.png" id="toLogOut" alt="">
-
-  <h1> Hola! estos son tus posts</h1>
-  <form id="add-cafe-form">
-    <input type="text" name="titulo" placeholder="titulo">
-    <input type="text" name="contenido" placeholder="contenido">
-    <button>Publicar</button>
-  </form>
-
-  <!-- contenido del nuevo post -->
-  <main id="newPostContentDiv" class="newPostDiv">
-
-  <div class="newPostContent">
-
-      <header class="newPost">
-        Adjunta una foto
-        <img src="./lib/images/plus.webp" alt="adjuntarArchivo" id="selectFile" class="selectFile">
-        <input type="file" id="newPostImgFile" class="NewPostImg" value="">
-      </header>
-
-      <div class="postImgDiv">
-        <img src="" class="imgNewPost" id="imgToPost">
-      </div>
-
-      <textarea id="newPostText" name="newPostText" class="newPostTextInput" rows="4" cols="50" placeholder="Escribe aquí tu mensaje.."></textarea>
+  <h1>Editar publicación</h1>
       
-      <input type="submit" value="Publicar" class="postButton" id="publishBtn">
+          <div class="newPostContent">
+              <div class="postImgDiv">
+                <img src="${postImage}" class="imgNewPost" id="imgToPost">
+              </div>
+              <textarea id="newPostText" name="newPostText" class="newPostTextInput" rows="4" cols="50">${message}</textarea>
+              <input type="submit" value="Guardar cambios" class="postButton" id="saveChangesBtn">
+          </div>
+      </main>
+      
+      <div id="footer">
+  <img src="./lib/images/home.webp" class="item" id="wall" alt="">
+  <img src="./lib/images/plus.webp" class="item" id="add" alt="">
+  <img src="./lib/images/profile.png" class="item" id="profile" alt="">
   </div>
 
-  </main>
-
-  <p class="result"></p>
-  <ul id="cafe-list"></ul>
-
-  <a href="#/profile" class="button">Ir al perfil</a>
-  <a href="#/post" class="button">Ir al muro</a>
-    `;
+      <div>`;
 
   divEditPost.innerHTML = viewEditPost;
 
+  // Variables globales a utilizar
+  const database = firebase.firestore();
+  const saveChangesBtn = divEditPost.querySelector('#saveChangesBtn');
   const out = divEditPost.querySelector('#toLogOut');
+  const wall = divEditPost.querySelector('#wall');
+  const add = divEditPost.querySelector('#add');
+  const profile = divEditPost.querySelector('#profile');
+
+  profile.addEventListener('click', () => {
+    window.open('#/profile', '_self');
+  });
   out.addEventListener('click', () => {
     logOut();
   });
-
-  const cafeList = divEditPost.querySelector('#cafe-list');
-  const form = divEditPost.querySelector('#add-cafe-form');
-
-  const renderCafe = (doc) => {
-    let li = document.createElement('li');
-    let titulo = document.createElement('span');
-    titulo.classList.add('titulo');
-    let contenido = document.createElement('span');
-    contenido.classList.add('contenido');
-    let cross = document.createElement('div');
-    let saveChanges = document.createElement('span');
-
-    li.setAttribute('data-id', doc.id);
-    titulo.textContent = doc.data().titulo;
-    titulo.contentEditable = true;
-    contenido.textContent = doc.data().contenido;
-    contenido.contentEditable = true;
-    cross.textContent = 'x';
-    saveChanges.textContent = 'guardar cambios';
-
-    li.appendChild(titulo);
-    li.appendChild(contenido);
-    li.appendChild(cross);
-    li.appendChild(saveChanges);
-
-    cafeList.appendChild(li);
-
-    // deleting data 
-    cross.addEventListener('click', (e) => {
-      e.stopPropagation();
-      let id = e.target.parentElement.getAttribute('data-id');
-      database.collection('publicaciones').doc(id).delete();
-    })
-    // updating data 
-    saveChanges.addEventListener('click', (e) => {
-     const user = firebase.auth().currentUser;
-      let id = e.target.parentElement.getAttribute('data-id');
-      database.collection('publicaciones').doc(id).update({
-        titulo: e.target.parentElement.querySelector('.titulo').innerHTML,
-        contenido: e.target.parentElement.querySelector('.contenido').innerHTML,
-        usuario: user.displayName
-      }).then( () => {
-        document.querySelector('.result').innerHTML = "Contenido actualizado";
-        setTimeout( () => {
-          document.querySelector('.result').innerHTML = "";
-        }, 5000)
-      }) 
-    });
-
-  }
-  // saving data
-  form.addEventListener('submit', (e) => {
-    e.preventDefault();
-    const user = firebase.auth().currentUser;
-    database.collection('publicaciones').add({
-      titulo: form.titulo.value,
-      contenido: form.contenido.value,
-      usuario: user.displayName
-    });
-    form.titulo.value = '';
-    form.contenido.value = '';
+  wall.addEventListener('click', () => {
+    window.open('#/home', '_self');
   });
-  // real-time listener
-  let database = firebase.firestore();
-  database.collection('publicaciones').orderBy('titulo').onSnapshot(snapshot => {
-    let changes = snapshot.docChanges();
-    changes.forEach(change => {
-      if (change.type == 'added') {
-        renderCafe(change.doc);
-      } else if (change.type == 'removed') {
-        let li = cafeList.querySelector('[data-id=' + change.doc.id + ']');
-        cafeList.removeChild(li);
-      }
-    })
-  })
+  add.addEventListener('click', () => {
+    window.open('#/newPost', '_self');
+  });
+
+  // función para guardar el valor del mensaje editado
+  saveChangesBtn.addEventListener('click', () => {
+    const postDescription = divEditPost.querySelector('#newPostText').value;
+
+    // función para actualizar mensaje editado en firebase
+    database
+      .collection('posts')
+      .doc(docID)
+      .update({
+        message: postDescription,
+      })
+      .then(() => {
+        const root = document.getElementById('root');
+        root.innerHTML = '';
+        root.appendChild(posts());
+      });
+  });
 
   return divEditPost;
 };
