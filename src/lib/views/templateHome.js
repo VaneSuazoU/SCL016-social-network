@@ -18,7 +18,7 @@ export const posts = () => {
     </div>`;
 
   divHome.innerHTML = viewHome;
-  // Variables globales a utilizar
+
   const profile = divHome.querySelector('#profile');
   const out = divHome.querySelector('#toLogOut');
   const wall = divHome.querySelector('#wall');
@@ -37,7 +37,6 @@ export const posts = () => {
     window.open('#/newPost', '_self');
   });
 
-  // función para ordenar los posts por hora de publicación y crear el contenido de los posts
   getDocument();
 
   return divHome;

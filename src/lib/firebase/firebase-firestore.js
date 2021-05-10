@@ -2,11 +2,6 @@ import { deletePosts } from './controllers/controllers.js';
 import { editPosts } from '../views/templateEditPost.js';
 
 export const perfilPost = (perfil) => {
-/*   const redirection = (docID, message, postImages) => {
-    const root = document.getElementById('root');
-    root.innerHTML = '';
-    root.appendChild(editPosts(docID, message, postImages));
-   };*/
   // contenedor de los posts
   const home = document.querySelector('#wallContent');
   const post = document.createElement('div');
@@ -15,14 +10,15 @@ export const perfilPost = (perfil) => {
   const options = document.createElement('div');
   const eliminar = document.createElement('img');
   const editPost = document.createElement('img');
-  const node = document.createElement('div');
+  const actualizar = document.createElement('button');
 
   // contenido de los posts
-  node.classList.add('node');
   post.classList.add('postContainer');
   postImage.classList.add('postImgs');
   postImage.src = perfil.data().postImage;
   postDescription.innerHTML = perfil.data().message;
+  postDescription.contentEditable = true;
+
   eliminar.src = './lib/images/delete.png';
   eliminar.classList.add('options');
   editPost.classList.add('options');
@@ -30,26 +26,35 @@ export const perfilPost = (perfil) => {
   eliminar.addEventListener('click', () => {
     deletePosts(perfil.id);
   });
+
   editPost.addEventListener('click', () => {
-    console.log('click');
     const docID = perfil.id;
     const message = perfil.data().message;
-    const postImg = perfil.data().postImage;
-    /* redirection(docID, message, postImg); */
-    node.appendChild(editPosts(docID, message, postImg));
+    home.appendChild(editPosts(docID, message));
   });
-
+  actualizar.addEventListener('click', () => {
+    const docID = perfil.id;
+    const messages = postDescription.innerHTML;
+    firebase.firestore().collection('posts').doc(docID).update({
+      message: messages,
+    })
+      .then(() => {
+        /*  console.log('actualizado'); */
+      });
+    postDescription.contentEditable = false;
+  });
   // orden de los contenedores
   home.appendChild(post);
   post.appendChild(postImage);
   post.appendChild(postDescription);
+  post.appendChild(actualizar);
   post.appendChild(options);
   options.appendChild(eliminar);
   options.appendChild(editPost);
 };
 
 // funcion para crear posts
-const crearPost = (docs) => {
+export const crearPost = (docs) => {
   // contenedor de los posts
   const home = document.querySelector('#wallContentDiv');
   const post = document.createElement('div');
@@ -145,7 +150,6 @@ export const getDocument = () => firebase.firestore()
 
 export const getDocumentProfile = () => firebase.firestore()
   .collection('posts')
-  /*   .where('userID', '==', firebase.auth().currentUser.uid) */
   .get()
   .then((snapshot) => {
     snapshot.docs.forEach((docs) => {
@@ -154,6 +158,5 @@ export const getDocumentProfile = () => firebase.firestore()
       if (perfil === user.displayName) {
         perfilPost(docs);
       }
-      /*       perfilPost(docs); */
     });
   });

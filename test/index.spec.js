@@ -9,6 +9,7 @@ import { newPost } from '../src/lib/views/templateNewPost.js';
 import { editPosts } from '../src/lib/views/templateEditPost.js';
 import { logOut } from '../src/lib/firebase/firebase-auth.js';
 
+
 describe('logIn', () => {
   const divLogIn = logIn();
   it('should be a function', () => {
