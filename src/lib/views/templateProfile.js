@@ -1,5 +1,5 @@
 import { logOut } from '../firebase/firebase-auth.js';
-import { editPosts } from './templateEditPost.js';
+import { getDocumentProfile } from '../firebase/firebase-firestore.js';
 
 export const profileView = () => {
   const divPerfil = document.createElement('div');
@@ -9,7 +9,7 @@ export const profileView = () => {
     <img src="./lib/images/logout.png" id="toLogOut" alt="">
     <h1>Tus publicaciones</h1>
 
-    <main id="wallContentDiv" class="wallContent"></main>
+    <main id="wallContent" class="wallContent"></main>
   
     <div id="footer">
     <img src="./lib/images/home.webp" class="item" id="wall" alt="">
@@ -19,8 +19,6 @@ export const profileView = () => {
 
   divPerfil.innerHTML = viewPerfil;
   // Variables globales a utilizar
-  const firestore = firebase.firestore();
-  const user = firebase.auth().currentUser;
   const profile = divPerfil.querySelector('#profile');
   const out = divPerfil.querySelector('#toLogOut');
   const wall = divPerfil.querySelector('#wall');
@@ -40,7 +38,7 @@ export const profileView = () => {
   });
 
   // función para ordenar los posts por hora de publicación y crear el contenido de los posts
-  firestore.collection('posts').where('userName', '==', 'meme time').get().then((snapshot) => {
+  /*   firestore.collection('posts').where('userName', '==', 'meme time').get().then((snapshot) => {
     divPerfil.querySelector('#wallContentDiv').innerHTML = '';
     snapshot.forEach((doc) => {
       // contenedor de los posts
@@ -79,7 +77,7 @@ export const profileView = () => {
             .then(() => { })
             .catch(() => {
               /* console.error('Error removing document: ', error); */
-            });
+  /*             });
         }
       });
 
@@ -103,6 +101,9 @@ export const profileView = () => {
         redirection(docID, message, postImg);
       };
     });
-  });
+  }); */
+
+  getDocumentProfile();
+
   return divPerfil;
 };

@@ -76,6 +76,7 @@ export const createAccount = () => {
         nombre: username,
         email,
       });
+
       // ...
     })
     .then(() => {

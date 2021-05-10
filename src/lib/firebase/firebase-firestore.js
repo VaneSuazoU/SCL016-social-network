@@ -1,40 +1,159 @@
-/* const posts = firebase.firestore();
-      return posts.collection('posts').doc().set({
-        nombre: username,
-        email,
-        postContent: biograph,
-      });
- */
+import { deletePosts } from './controllers/controllers.js';
+import { editPosts } from '../views/templateEditPost.js';
 
-/* Firestore */
-/* let database = firebase.firestore();
+export const perfilPost = (perfil) => {
+/*   const redirection = (docID, message, postImages) => {
+    const root = document.getElementById('root');
+    root.innerHTML = '';
+    root.appendChild(editPosts(docID, message, postImages));
+   };*/
+  // contenedor de los posts
+  const home = document.querySelector('#wallContent');
+  const post = document.createElement('div');
+  const postImage = document.createElement('img');
+  const postDescription = document.createElement('p');
+  const options = document.createElement('div');
+  const eliminar = document.createElement('img');
+  const editPost = document.createElement('img');
+  const node = document.createElement('div');
 
-database.collection("user").get().then((querySnapshot) => {
-    querySnapshot.forEach((doc) => {
-       //  doc.data() is never undefined for query doc snapshots
-        console.log(doc.id, " => ", doc.data());
-    });
-});
-*/
-/* const renderCafe = (doc) => {
-  const li = document.createElement('li');
-  const name = document.createElement('span');
-  const city = document.createElement('span');
+  // contenido de los posts
+  node.classList.add('node');
+  post.classList.add('postContainer');
+  postImage.classList.add('postImgs');
+  postImage.src = perfil.data().postImage;
+  postDescription.innerHTML = perfil.data().message;
+  eliminar.src = './lib/images/delete.png';
+  eliminar.classList.add('options');
+  editPost.classList.add('options');
+  editPost.src = './lib/images/edit.png';
+  eliminar.addEventListener('click', () => {
+    deletePosts(perfil.id);
+  });
+  editPost.addEventListener('click', () => {
+    console.log('click');
+    const docID = perfil.id;
+    const message = perfil.data().message;
+    const postImg = perfil.data().postImage;
+    /* redirection(docID, message, postImg); */
+    node.appendChild(editPosts(docID, message, postImg));
+  });
 
-  li.setAttribute('data-id', doc.id);
-  name.textContent = doc.data().name;
-  city.textContent = doc.data().city;
-
-  li.appendChild(name);
-  li.appendChild(city);
-
-  cafeList.appendChild(li);
+  // orden de los contenedores
+  home.appendChild(post);
+  post.appendChild(postImage);
+  post.appendChild(postDescription);
+  post.appendChild(options);
+  options.appendChild(eliminar);
+  options.appendChild(editPost);
 };
 
-const database = firebase.firestore();
-database.collection('prueba').get().then((snapshot) => {
-  snapshot.docs.forEach((doc) => {
-    renderCafe(doc);
+// funcion para crear posts
+const crearPost = (docs) => {
+  // contenedor de los posts
+  const home = document.querySelector('#wallContentDiv');
+  const post = document.createElement('div');
+  const postImage = document.createElement('img');
+  const postDescription = document.createElement('p');
+  const likes = document.createElement('div');
+  const like = document.createElement('img');
+  const countLikes = document.createElement('span');
+  const userPic = document.createElement('img');
+  const userName = document.createElement('h2');
+  const userInfo = document.createElement('div');
+  const user = firebase.auth().currentUser;
+
+  // contenido de los posts
+  post.classList.add('postContainer');
+  postImage.classList.add('postImgs');
+  postImage.src = docs.data().postImage;
+  postDescription.innerHTML = docs.data().message;
+  likes.classList.add('likes');
+  like.src = './lib/images/liked.png';
+  like.classList.add('like-img', 'likes');
+  countLikes.classList.add('likes');
+  userPic.src = docs.data().userPhotoURL;
+  userPic.classList.add('userImg');
+  userName.innerHTML = docs.data().userName;
+  userInfo.classList.add('userInfo');
+
+  // orden de los contenedores
+  home.appendChild(post);
+  post.appendChild(userInfo);
+  userInfo.appendChild(userPic);
+  userInfo.appendChild(userName);
+  post.appendChild(postImage);
+  post.appendChild(postDescription);
+  post.appendChild(likes);
+  likes.appendChild(like);
+  likes.appendChild(countLikes);
+
+  // count likes
+  const database = firebase.firestore();
+  let isLike = false;
+  let idLike;
+  database.collection('likes').where('post', '==', docs.id).get().then((likeResult) => {
+    countLikes.textContent = likeResult.docs.length;
   });
-});
- */
+
+  // give likes
+  database.collection('likes').where('post', '==', docs.id).where('user', '==', user.uid).get()
+    .then((likeResult) => {
+      if (likeResult.docs.length) {
+        like.src = './lib/images/likedred.png';
+        isLike = true;
+        idLike = likeResult.docs[0].id;
+      }
+    });
+
+  like.addEventListener('click', () => {
+    database.collection('likes').where('post', '==', docs.id).where('user', '==', user.uid).get()
+      .then((likeResult) => {
+        if (likeResult.docs.length) {
+          like.src = './lib/images/likedred.png';
+          isLike = true;
+          idLike = likeResult.docs[0].id;
+        }
+        if (isLike) {
+          database.collection('likes').doc(idLike).delete();
+          like.src = './lib/images/liked.png';
+          isLike = false;
+        } else {
+          like.src = './lib/images/likedred.png';
+          database.collection('likes').add({
+            user: user.uid,
+            post: docs.id,
+          });
+          isLike = true;
+        }
+        // count likes
+        database.collection('likes').where('post', '==', docs.id).get().then((likeRslt) => {
+          countLikes.textContent = likeRslt.docs.length;
+        });
+      });
+  });
+};
+
+export const getDocument = () => firebase.firestore()
+  .collection('posts')
+  .get()
+  .then((snapshot) => {
+    snapshot.docs.forEach((docs) => {
+      crearPost(docs);
+    });
+  });
+
+export const getDocumentProfile = () => firebase.firestore()
+  .collection('posts')
+  /*   .where('userID', '==', firebase.auth().currentUser.uid) */
+  .get()
+  .then((snapshot) => {
+    snapshot.docs.forEach((docs) => {
+      const user = firebase.auth().currentUser;
+      const perfil = docs.data().userName;
+      if (perfil === user.displayName) {
+        perfilPost(docs);
+      }
+      /*       perfilPost(docs); */
+    });
+  });

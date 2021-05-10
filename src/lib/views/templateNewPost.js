@@ -20,7 +20,7 @@ export const newPost = () => {
   
             <textarea id="newPostText" name="newPostText" class="newPostTextInput" rows="4" cols="50" placeholder="Escribe aquí tu mensaje.."></textarea>
             
-            <input type="submit" value="Publicar" class="postButton" id="publishBtn">
+            <input type="submit" value="Publicar" class="button" id="publishBtn">
 
         <div id="footer">
   <img src="./lib/images/home.webp" class="item" id="wall" alt="">
@@ -98,7 +98,7 @@ export const newPost = () => {
           });
         })
         .then(() => {
-          window.location.assign('#/post');
+          window.location.assign('#/home');
         });
     }
   });

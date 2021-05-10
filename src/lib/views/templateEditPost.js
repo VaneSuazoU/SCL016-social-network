@@ -11,10 +11,10 @@ export const editPosts = (docID, message, postImage) => {
       
           <div class="newPostContent">
               <div class="postImgDiv">
-                <img src="${postImage}" class="imgNewPost" id="imgToPost">
+                <img src="${postImage}" class="postImgs" id="imgToPost">
               </div>
               <textarea id="newPostText" name="newPostText" class="newPostTextInput" rows="4" cols="50">${message}</textarea>
-              <input type="submit" value="Guardar cambios" class="postButton" id="saveChangesBtn">
+              <input type="submit" value="Guardar cambios" class="button" id="saveChangesBtn">
           </div>
       </main>
       
@@ -61,9 +61,7 @@ export const editPosts = (docID, message, postImage) => {
         message: postDescription,
       })
       .then(() => {
-        const root = document.getElementById('root');
-        root.innerHTML = '';
-        root.appendChild(posts());
+        console.log('contenido actualizado');
       });
   });
 
