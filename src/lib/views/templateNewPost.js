@@ -10,7 +10,7 @@ export const newPost = () => {
         
             <div class="newPost">
               Adjunta una foto
-              <img src="./lib/images/plus.webp" alt="adjuntarArchivo" id="selectFile" class="selectFile">
+              
               <input type="file" id="newPostImgFile" class="NewPostImg" value="">
             </div>
   
