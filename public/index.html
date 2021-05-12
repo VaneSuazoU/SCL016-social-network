@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="./lib/styles/style.css">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300&display=swap" rel="stylesheet">
+  <title>MemeTime</title>
+</head>
+
+<body>
+
+  <section id="root"></section>
+
+
+  <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-firestore.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.4.2/firebase-storage.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-auth.js"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <script type="module" src="main.js"></script>
+  <script>
+    const firebaseConfig = {
+      apiKey: 'AIzaSyDOoxqpxrm0fytTOYMx1OQ26RHoGEYjLwQ',
+      authDomain: 'meme-time-e23ce.firebaseapp.com',
+      projectId: 'meme-time-e23ce',
+      storageBucket: 'meme-time-e23ce.appspot.com',
+      messagingSenderId: '333217439157',
+      appId: '1:333217439157:web:6c3a1c3e59ec8a86db0dfc',
+    };
+
+    firebase.initializeApp(firebaseConfig);
+  </script>
+</body>
+
+</html>
