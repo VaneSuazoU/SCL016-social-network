@@ -10,8 +10,7 @@ export const perfilPost = (perfil) => {
   const options = document.createElement('div');
   const eliminar = document.createElement('img');
   const editPost = document.createElement('img');
-  const actualizar = document.createElement('button');
-
+  
   // contenido de los posts
   post.classList.add('postContainer');
   postImage.classList.add('postImgs');
@@ -29,17 +28,12 @@ export const perfilPost = (perfil) => {
 
   editPost.addEventListener('click', () => {
     const docID = perfil.id;
-    const message = perfil.data().message;
-    home.appendChild(editPosts(docID, message));
-  });
-  actualizar.addEventListener('click', () => {
-    const docID = perfil.id;
     const messages = postDescription.innerHTML;
     firebase.firestore().collection('posts').doc(docID).update({
       message: messages,
     })
       .then(() => {
-        /*  console.log('actualizado'); */
+        swal("Éxito!", "Contenido actualizado", "success") ;
       });
     postDescription.contentEditable = false;
   });
@@ -47,7 +41,7 @@ export const perfilPost = (perfil) => {
   home.appendChild(post);
   post.appendChild(postImage);
   post.appendChild(postDescription);
-  post.appendChild(actualizar);
+  
   post.appendChild(options);
   options.appendChild(eliminar);
   options.appendChild(editPost);
