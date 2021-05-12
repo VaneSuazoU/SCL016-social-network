@@ -1,15 +1,15 @@
 import { logOut } from '../firebase/firebase-auth.js';
-import { getDocument } from '../firebase/firebase-firestore.js';
+import { getDocumentProfile } from '../firebase/firebase-firestore.js';
 
-export const posts = () => {
-  const divHome = document.createElement('div');
-  divHome.classList.add('container', 'posts');
-  const viewHome = `
+export const profileView = () => {
+  const divPerfil = document.createElement('div');
+  divPerfil.classList.add('container', 'posts');
+  const viewPerfil = `
     <img src="./lib/images/titulo.png" class="header" alt="">
     <img src="./lib/images/logout.png" id="toLogOut" alt="">
-    <h1>Bienvenido a MemeTime</h1>
-    
-    <main id="wallContentDiv" class="wallContent"></main>
+    <h1>Tus publicaciones</h1>
+
+    <main id="wallContent" class="wallContent"></main>
   
     <div id="footer">
     <img src="./lib/images/home.webp" class="item" id="wall" alt="">
@@ -17,12 +17,12 @@ export const posts = () => {
     <img src="./lib/images/profile.png" class="item" id="profile" alt="">
     </div>`;
 
-  divHome.innerHTML = viewHome;
+  divPerfil.innerHTML = viewPerfil;
 
-  const profile = divHome.querySelector('#profile');
-  const out = divHome.querySelector('#toLogOut');
-  const wall = divHome.querySelector('#wall');
-  const add = divHome.querySelector('#add');
+  const profile = divPerfil.querySelector('#profile');
+  const out = divPerfil.querySelector('#toLogOut');
+  const wall = divPerfil.querySelector('#wall');
+  const add = divPerfil.querySelector('#add');
 
   profile.addEventListener('click', () => {
     window.open('#/profile', '_self');
@@ -37,7 +37,7 @@ export const posts = () => {
     window.open('#/newPost', '_self');
   });
 
-  getDocument();
+  getDocumentProfile();
 
-  return divHome;
+  return divPerfil;
 };

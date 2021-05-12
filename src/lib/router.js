@@ -1,8 +1,11 @@
-import { home } from './views/templateHome.js';
-import { personajes } from './views/templatePersonajes.js';
+import { logIn } from './views/templateLogIn.js';
+import { signIn } from './views/templateSignIn.js';
 import { error } from './views/templateError.js';
-import { recuperar } from './views/templateRecuperar.js';
-import { menu } from './views/templateMenu.js';
+import { recoverPassword } from './views/templatePassword.js';
+import { profileView } from './views/templateProfile.js';
+import { newPost } from './views/templateNewPost.js';
+import { posts } from './views/templateHome.js';
+import { editPosts } from './views/templateEditPost.js';
 
 const showTemplate = (hash) => {
   const containerRoot = document.getElementById('root');
@@ -12,16 +15,25 @@ const showTemplate = (hash) => {
     case '':
     case '#':
     case '#/':
-      containerRoot.appendChild(home());
+      containerRoot.appendChild(logIn());
       break;
-    case '#/personajes':
-      containerRoot.appendChild(personajes());
+    case '#/newPost':
+      containerRoot.appendChild(newPost());
       break;
-    case '#/recuperar':
-      containerRoot.appendChild(recuperar());
+    case '#/signIn':
+      containerRoot.appendChild(signIn());
       break;
-    case '#/menu':
-      containerRoot.appendChild(menu());
+    case '#/recoverPassword':
+      containerRoot.appendChild(recoverPassword());
+      break;
+    case '#/profile':
+      containerRoot.appendChild(profileView());
+      break;
+    case '#/editPosts':
+      containerRoot.appendChild(editPosts());
+      break;
+    case '#/home':
+      containerRoot.appendChild(posts());
       break;
     default:
       containerRoot.appendChild(error());
@@ -29,10 +41,5 @@ const showTemplate = (hash) => {
 };
 
 export const changeRoute = (hash) => {
-  if (hash === '#/') {
-    return showTemplate(hash);
-  } if (hash === '#/personajes') {
-    return showTemplate(hash);
-  }
-  return showTemplate(hash);
+  showTemplate(hash);
 };

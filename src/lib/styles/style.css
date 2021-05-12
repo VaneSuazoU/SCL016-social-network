@@ -1,0 +1,131 @@
+* {
+    font-family: 'Lexend', sans-serif;
+}
+
+body {
+    background-image: url(../images/background.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.posts {
+    background-color:white;
+}
+.options {
+    width: 1.5rem;
+}
+.imgPost {
+    width: 20%;
+}
+a {
+    text-decoration: none;
+    color: orangered;
+    font-weight: bold;
+}
+.title {
+    width: 18rem;
+}
+/* flexbox */
+.container {
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    min-height: 100vh;
+    justify-content: center;
+    text-align: center;
+}
+#google {
+    margin-top: 2rem;
+}
+.like-img {
+    width: 2rem;
+    margin-left: 1rem;
+}
+.likes {
+    display: flex;
+    align-items: center;
+    align-self: stretch;
+}
+#toLogOut {
+    display: flex;
+    align-self: flex-end;
+}
+.item {
+    width: 3rem;
+    margin: 1%;
+}
+.username {
+    font-weight: bold;
+    font-size: larger;
+    text-align: left;
+}
+#footer {
+    background-image: url(../images/footer2.png);
+    background-size: cover;
+    display: flex;
+    justify-content: space-around;
+    width: -webkit-fill-available;
+}
+.header {
+    display: flex;
+    width: -webkit-fill-available;
+}
+.result {
+    color: gray;
+    text-align: center;
+    font-weight: bold;
+}
+#send, 
+#send2,
+#send3 {
+    padding: 1% 3%;
+    color: orangered;
+    background-color: #BDC1C0;
+    border-style: none;
+    border-radius: 6%;
+    filter: drop-shadow(1px 1px 2px gray);
+    font-weight: bold;
+    margin: 2%;
+}
+.button {
+    padding: 1% 2%;
+    color: orangered;
+    border-style: solid;
+    border-color: #BDC1C0;
+    border-radius: 6%;
+}
+
+input {
+    filter: drop-shadow(1px 2px 2px gray);
+    border: 1px solid black;
+    margin: 1%;
+}
+
+.postContainer {
+    background-color:#bdc1c0;
+    padding: 2%;
+    width: 70%;
+    display: flex;
+    align-items: center;
+    margin: auto;
+    flex-flow: column wrap;
+    border-radius: 4%;
+    margin-top: 2%;
+    margin-bottom: 2%;
+}
+.postImgs,
+#newPostText,
+#img-error,
+#imgToPost
+ {
+    width: 40%;
+}
+.userInfo {
+    display: flex;
+    width: 70%;
+    align-items: center;
+    margin: 2%;
+}
+.userImg {
+    width: 9%;
+    margin-right: 2%;
+}
