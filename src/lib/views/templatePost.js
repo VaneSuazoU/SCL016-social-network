@@ -14,12 +14,6 @@ export const newpost = () => {
   `;
   divPost.innerHTML = viewNewpost;
 
-  const uploader = document.getElementById('uploader');
-  const fileButton = document.getElementById('uploadPost');
-  fileButton.addEventListener('change', () => {
-    const file = e.target.files[0];
-
-  })
 
 
   return divPost;
