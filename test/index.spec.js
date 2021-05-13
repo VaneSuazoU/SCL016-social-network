@@ -6,9 +6,7 @@ import { recoverPassword } from '../src/lib/views/templatePassword.js';
 import { posts } from '../src/lib/views/templateHome.js';
 import { profileView } from '../src/lib/views/templateProfile.js';
 import { newPost } from '../src/lib/views/templateNewPost.js';
-import { editPosts } from '../src/lib/views/templateEditPost.js';
 import { logOut } from '../src/lib/firebase/firebase-auth.js';
-
 
 describe('logIn', () => {
   const divLogIn = logIn();
@@ -76,15 +74,6 @@ describe('newPost', () => {
   });
   it('should render without crashing', () => {
     expect(divNewPost instanceof HTMLElement).toBe(true);
-  });
-});
-describe('editPosts', () => {
-  const divEditPost = editPosts();
-  it('should be a function', () => {
-    expect(typeof editPosts).toBe('function');
-  });
-  it('should render without crashing', () => {
-    expect(divEditPost instanceof HTMLElement).toBe(true);
   });
 });
 describe('logOut', () => {

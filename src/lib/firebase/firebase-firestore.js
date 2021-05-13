@@ -1,5 +1,4 @@
 import { deletePosts } from './controllers/controllers.js';
-import { editPosts } from '../views/templateEditPost.js';
 
 export const perfilPost = (perfil) => {
   // contenedor de los posts
@@ -10,7 +9,7 @@ export const perfilPost = (perfil) => {
   const options = document.createElement('div');
   const eliminar = document.createElement('img');
   const editPost = document.createElement('img');
-  
+
   // contenido de los posts
   post.classList.add('postContainer');
   postImage.classList.add('postImgs');
@@ -33,7 +32,8 @@ export const perfilPost = (perfil) => {
       message: messages,
     })
       .then(() => {
-        swal("Éxito!", "Contenido actualizado", "success") ;
+        alert('Éxito!', 'Contenido actualizado', 'success');
+        /* swal('Éxito!', 'Contenido actualizado', 'success'); */
       });
     postDescription.contentEditable = false;
   });
@@ -41,7 +41,7 @@ export const perfilPost = (perfil) => {
   home.appendChild(post);
   post.appendChild(postImage);
   post.appendChild(postDescription);
-  
+
   post.appendChild(options);
   options.appendChild(eliminar);
   options.appendChild(editPost);

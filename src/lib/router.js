@@ -5,7 +5,6 @@ import { recoverPassword } from './views/templatePassword.js';
 import { profileView } from './views/templateProfile.js';
 import { newPost } from './views/templateNewPost.js';
 import { posts } from './views/templateHome.js';
-import { editPosts } from './views/templateEditPost.js';
 
 const showTemplate = (hash) => {
   const containerRoot = document.getElementById('root');
@@ -29,9 +28,9 @@ const showTemplate = (hash) => {
     case '#/profile':
       containerRoot.appendChild(profileView());
       break;
-    case '#/editPosts':
+      /*     case '#/editPosts':
       containerRoot.appendChild(editPosts());
-      break;
+      break; */
     case '#/home':
       containerRoot.appendChild(posts());
       break;

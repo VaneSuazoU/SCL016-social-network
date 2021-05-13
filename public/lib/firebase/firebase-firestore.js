@@ -33,7 +33,7 @@ export const perfilPost = (perfil) => {
     })
       .then(() => {
         /* document.querySelector('.result').innerHTML = 'Contenido actualizado'; */
-        swal("Éxito!", "Contenido actualizado", "success");
+        swal('Éxito!', 'Contenido actualizado', 'success');
       });
     postDescription.contentEditable = false;
   });
