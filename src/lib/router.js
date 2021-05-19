@@ -28,14 +28,12 @@ const showTemplate = (hash) => {
     case '#/profile':
       containerRoot.appendChild(profileView());
       break;
-      /*     case '#/editPosts':
-      containerRoot.appendChild(editPosts());
-      break; */
     case '#/home':
       containerRoot.appendChild(posts());
       break;
     default:
       containerRoot.appendChild(error());
+      break;
   }
 };
 

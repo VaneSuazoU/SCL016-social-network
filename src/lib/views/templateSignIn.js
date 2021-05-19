@@ -5,8 +5,8 @@ export const signIn = () => {
   divsignIn.classList.add('container');
   const viewsignIn = `
     <img src="./lib/images/logo.png" class="title" alt="">
+    <main>
     <h2>Regístrate, mira y comparte memes</h2>
-    
     <input type="email" id ="email" placeholder="Correo electrónico">
     <input type="text" id ="username" placeholder="Nombre de usuario">
     <input type="password" id ="password" placeholder="Contraseña">
@@ -19,8 +19,7 @@ export const signIn = () => {
     
     <h4>¿Tienes cuenta?</h4>
     <a href="#/" class="button">Inicia sesión</a>
-    
-    <img src="./lib/images/footer.png" class="title" alt="">
+    </main>
     `;
 
   divsignIn.innerHTML = viewsignIn;

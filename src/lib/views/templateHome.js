@@ -5,10 +5,13 @@ export const posts = () => {
   const divHome = document.createElement('div');
   divHome.classList.add('container', 'posts');
   const viewHome = `
-    <img src="./lib/images/titulo.png" class="header" alt="">
+    <img src="./lib/images/titulo.png" class="title" alt="">
+
+    <header>
     <img src="./lib/images/logout.png" id="toLogOut" alt="">
     <h1>Bienvenido a MemeTime</h1>
-    
+    </header>
+
     <main id="wallContentDiv" class="wallContent"></main>
   
     <div id="footer">
@@ -27,9 +30,8 @@ export const posts = () => {
   profile.addEventListener('click', () => {
     window.open('#/profile', '_self');
   });
-  out.addEventListener('click', () => {
-    logOut();
-  });
+  out.addEventListener('click', logOut);
+  
   wall.addEventListener('click', () => {
     window.open('#/home', '_self');
   });

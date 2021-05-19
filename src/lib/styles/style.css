@@ -3,7 +3,7 @@
 }
 
 body {
-    background-image: url(../images/background.png);
+    background-image: linear-gradient(to bottom, #33c2ff, #50c8ff, #66cfff, #79d5ff, #8bdbff, #98dfff, #a5e4ff, #b1e8ff, #bdecff, #c8efff, #d4f3ff, #dff6ff);
     background-repeat: no-repeat;
     background-size: cover;
 }
@@ -65,9 +65,14 @@ a {
     justify-content: space-around;
     width: -webkit-fill-available;
 }
-.header {
+.title {
     display: flex;
     width: -webkit-fill-available;
+}
+header {
+    display: flex;
+    min-width: 70%;
+    flex-direction: column;
 }
 .result {
     color: gray;

@@ -4,7 +4,8 @@ export const logOut = () => {
   }).catch((error) => {
     document.querySelector('.result').innerHTML = error.message;
   });
-};
+}; 
+
 
 export const emailVerification = () => {
   const user = firebase.auth().currentUser;

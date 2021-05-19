@@ -1,13 +1,17 @@
 import { logOut } from '../firebase/firebase-auth.js';
 import { getDocumentProfile } from '../firebase/firebase-firestore.js';
 
+
 export const profileView = () => {
   const divPerfil = document.createElement('div');
   divPerfil.classList.add('container', 'posts');
   const viewPerfil = `
-    <img src="./lib/images/titulo.png" class="header" alt="">
+    <img src="./lib/images/titulo.png" class="title" alt="">
+
+    <header>
     <img src="./lib/images/logout.png" id="toLogOut" alt="">
     <h1>Tus publicaciones</h1>
+    </header>
 
     <main id="wallContent" class="wallContent"></main>
   
@@ -27,9 +31,8 @@ export const profileView = () => {
   profile.addEventListener('click', () => {
     window.open('#/profile', '_self');
   });
-  out.addEventListener('click', () => {
-    logOut();
-  });
+  out.addEventListener('click', logOut);
+
   wall.addEventListener('click', () => {
     window.open('#/home', '_self');
   });
